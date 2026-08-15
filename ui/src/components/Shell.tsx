@@ -11,7 +11,7 @@ export default function Shell({
 }) {
   return (
     <div className="fc-ground w-full">
-      <header className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 sm:px-10">
+      <header className={`mx-auto flex ${maxWidth} items-center justify-between px-6 py-5 sm:px-10`}>
         <Link
           to="/"
           className="font-display text-2xl text-white transition-opacity hover:opacity-80 sm:text-3xl"

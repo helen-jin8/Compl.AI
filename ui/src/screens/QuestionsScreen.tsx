@@ -23,10 +23,10 @@ export default function QuestionsScreen() {
   const answeredCount = followUps.filter((q) => answers[q.id]?.trim()).length
 
   return (
-    <Shell maxWidth="max-w-2xl">
+    <Shell maxWidth="max-w-4xl">
       <div className="fc-fade-up pt-4">
         <h1 className="font-body text-3xl font-bold leading-tight text-white sm:text-4xl">
-          A few follow-up questions
+          Follow-up questions
         </h1>
         <p className="mt-3 max-w-xl font-body text-base text-white/85">
           Our agent read your description and needs a little more detail to scope the right
@@ -36,7 +36,8 @@ export default function QuestionsScreen() {
         {analyzing ? (
           <div className="mt-8 rounded-2xl border border-ink/10 bg-white p-6 shadow-2xl shadow-deep/25 sm:p-9">
             <div className="flex items-center gap-2.5">
-              <span className="flex gap-1">
+              <p className="font-body text-xl text-ink">reading your description …</p>
+               <span className="flex gap-1">
                 {[0, 1, 2].map((i) => (
                   <span
                     key={i}
@@ -45,7 +46,6 @@ export default function QuestionsScreen() {
                   />
                 ))}
               </span>
-              <p className="font-body text-xl text-ink">reading your description …</p>
             </div>
             <p className="mt-2 font-body text-sm text-ink-soft">
               The agent is figuring out which details it still needs from you.
@@ -54,7 +54,7 @@ export default function QuestionsScreen() {
         ) : (
           <>
             <div className="mt-8 space-y-4">
-              {followUps.map((q, i) => {
+              {followUps.map((q) => {
                 const answered = answers[q.id]?.trim()
                 return (
                   <div
@@ -62,9 +62,6 @@ export default function QuestionsScreen() {
                     className="rounded-xl border border-ink/10 bg-white p-5 shadow-lg shadow-deep/10"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-deep font-body text-xs font-bold text-white">
-                        {i + 1}
-                      </span>
                       <div className="flex-1">
                         <p className="font-body text-lg font-bold text-ink">{q.question}</p>
                         <p className="mt-0.5 font-body text-xs text-ink-soft">{q.rationale}</p>

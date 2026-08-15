@@ -36,14 +36,17 @@ body {
   position: relative;
   min-height: 100vh;
   background:
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.35) 1.3px, transparent 1.6px),
-    linear-gradient(to bottom, rgba(17, 75, 138, 0.55), rgba(117, 185, 255, 0.55));
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.14) 1px, transparent 1.4px),
+    linear-gradient(to bottom, rgba(11, 52, 96, 0.97), rgba(58, 118, 190, 0.92));
   background-size:
-    22px 22px,
+    26px 26px,
     100% 100%;
   background-position:
     center,
     center;
+  /* Anchor to the viewport so the gradient stays consistent regardless of
+     content height (prevents the shift between short/tall report sections). */
+  background-attachment: fixed;
 }
 
 ::selection {

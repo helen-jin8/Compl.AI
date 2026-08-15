@@ -8,11 +8,13 @@ export interface FounderIntake {
   description: string
 }
 
-export interface SummaryChange {
+// A section of the generated hardware-description document, rendered like a
+// structured spec doc rather than a single paragraph.
+export interface SummarySection {
   id: string
-  title: string
-  detail: string
-  impact: 'high' | 'medium' | 'low'
+  heading: string
+  paragraphs?: string[]
+  bullets?: string[]
 }
 
 export interface FollowUpQuestion {
@@ -57,8 +59,7 @@ export interface ComplianceReport {
   projectName: string
   founder: FounderIntake
   generatedAt: string
-  summary: string
-  changes: SummaryChange[]
+  summary: SummarySection[]
   followUps: FollowUpQuestion[]
   checks: ComplianceCheck[]
   labs: TestLab[]
@@ -117,6 +118,14 @@ export class ComplianceApi {
     return { id: questionId, question: '', rationale: '', answer }
   }
 
+  /** Sends a founder tweak request against the summary doc to the agent. */
+  async refineSummary(reportId: string, message: string): Promise<{ accepted: boolean }> {
+    await wait(500)
+    void reportId
+    void message
+    return { accepted: true }
+  }
+
   private buildReport(
     intake: FounderIntake,
     answeredFollowUps: FollowUpQuestion[],
@@ -130,39 +139,61 @@ export class ComplianceApi {
         day: 'numeric',
         year: 'numeric',
       }),
-      summary:
-        `Based on your description, ${projectName} is a mains- and battery-powered connected consumer ` +
-        `device intended for the US and EU markets. It contains a lithium-ion cell, a 2.4 GHz radio, and ` +
-        `an external power supply — three subsystems that each pull in their own certification track. ` +
-        `We drafted the required standards, flagged two open questions, and reserved a slot with an expert reviewer.`,
-      changes: [
+      summary: [
         {
-          id: 'c1',
-          title: 'Classified as an intentional radio device',
-          detail:
-            'Your 2.4 GHz module makes this an FCC Part 15 Subpart C intentional radiator, which requires certified (not just verified) testing.',
-          impact: 'high',
+          id: 'sec-overview',
+          heading: 'Product overview',
+          paragraphs: [
+            `${projectName} is a mains- and battery-powered connected consumer device intended for the ` +
+              'US and EU markets. This document summarizes the hardware as understood from your description ' +
+              'and follow-up answers, for the purpose of scoping certification requirements.',
+          ],
         },
         {
-          id: 'c2',
-          title: 'Lithium-ion cell triggers UN 38.3 + UL 2054',
-          detail:
-            'Shipping and safety of the battery pack now require transport testing and cell/pack-level safety evaluation.',
-          impact: 'high',
+          id: 'sec-power',
+          heading: 'Power system',
+          paragraphs: [
+            'The device is fitted with a lithium-ion battery pack alongside an external mains power supply, ' +
+              'giving it two independent power sources that each carry their own compliance obligations.',
+          ],
+          bullets: [
+              'Rechargeable lithium-ion cell/pack',
+              'External AC/DC power supply or USB-C adapter',
+              'On-device charge and protection circuitry',
+            ],
         },
         {
-          id: 'c3',
-          title: 'Added EU market pathway',
-          detail:
-            'Because you mentioned selling in Europe, we mapped the equivalent CE/RED and EN 62368-1 requirements alongside the US set.',
-          impact: 'medium',
+          id: 'sec-connectivity',
+          heading: 'Wireless & connectivity',
+          paragraphs: [
+            'A 2.4 GHz radio module provides the primary wireless link. As an intentional radiator, this ' +
+              'subsystem is the main driver of the RF certification scope below.',
+          ],
+          bullets: ['2.4 GHz intentional radiator (Wi-Fi/BLE class module)', 'No cellular or LTE modem detected'],
         },
         {
-          id: 'c4',
-          title: 'Removed medical-device track',
-          detail:
-            'Your description does not indicate a medical claim, so we dropped the FDA/IEC 60601 path we initially considered.',
-          impact: 'low',
+          id: 'sec-enclosure',
+          heading: 'Enclosure & mechanical',
+          paragraphs: [
+            'The described housing is treated as a standard consumer-grade enclosure until confirmed otherwise ' +
+              'in the follow-up questions — material and flammability rating affect the safety test scope.',
+          ],
+        },
+        {
+          id: 'sec-markets',
+          heading: 'Target markets',
+          paragraphs: [
+            'Distribution is planned for the United States and European Union, which sets the certification ' +
+              'bodies and marks (FCC/UL for the US, CE/RED for the EU) this report covers.',
+          ],
+        },
+        {
+          id: 'sec-cert-summary',
+          heading: 'Certification scope summary',
+          paragraphs: [
+            'Based on the subsystems above, we drafted the required standards, flagged two open follow-up ' +
+              'questions, and reserved a slot with an expert reviewer to confirm the final plan.',
+          ],
         },
       ],
       followUps: answeredFollowUps.length

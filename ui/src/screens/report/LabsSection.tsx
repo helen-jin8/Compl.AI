@@ -16,14 +16,14 @@ export default function LabsSection() {
         {report.labs.map((lab) => (
           <div
             key={lab.id}
-            className="rounded-xl border border-ink/10 bg-white p-4 transition-shadow hover:shadow-md"
+            className="rounded-xl border border-ink/10 bg-white p-4 transition-all hover:border-2 hover:border-ink/30 hover:shadow-md"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="font-body text-base font-bold text-ink">{lab.name}</p>
-                <p className="font-body text-xs text-ink-soft">{lab.location}</p>
+                <p className="font-sans text-base font-bold text-ink">{lab.name}</p>
+                <p className="font-sans text-xs text-ink-soft">{lab.location}</p>
               </div>
-              <span className="flex items-center gap-1 rounded-full bg-chip px-2.5 py-0.5 font-body text-xs font-bold text-deep">
+              <span className="flex items-center gap-1 rounded-full bg-chip px-2.5 py-0.5 font-sans text-xs font-bold text-deep">
                 ★ {lab.rating.toFixed(1)}
               </span>
             </div>
@@ -34,13 +34,13 @@ export default function LabsSection() {
               {lab.accreditations.map((a) => (
                 <span
                   key={a}
-                  className="rounded-md border border-ink/15 bg-chip/30 px-2 py-0.5 font-body text-xs font-bold text-ink"
+                  className="rounded-md border border-ink/15 bg-chip/30 px-2 py-0.5 font-sans text-xs font-bold text-ink"
                 >
                   {a}
                 </span>
               ))}
             </div>
-            <p className="mt-3 font-body text-xs text-ink-soft">
+            <p className="mt-3 font-sans text-xs text-ink-soft">
               Typical lead time · <span className="font-bold text-ink">{lab.leadTime}</span>
             </p>
           </div>

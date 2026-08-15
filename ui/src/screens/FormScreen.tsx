@@ -31,7 +31,7 @@ export default function FormScreen() {
     'w-full rounded-lg border border-ink/70 bg-white px-4 py-3 font-body text-sm text-ink outline-none transition-shadow placeholder:text-ink-soft/60 focus:border-deep focus:ring-2 focus:ring-deep/30'
 
   return (
-    <Shell maxWidth="max-w-2xl">
+    <Shell maxWidth="max-w-4xl">
       <div className="fc-fade-up pt-4">
         <h1 className="font-body text-3xl font-bold leading-tight text-white sm:text-4xl">
           Tell us about what you're building
@@ -42,7 +42,7 @@ export default function FormScreen() {
 
         <div className="mt-8 space-y-4">
           <div>
-            <label className="mb-1.5 block font-body text-xs font-bold text-white">
+            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">
               Founder name
             </label>
             <input
@@ -53,7 +53,7 @@ export default function FormScreen() {
             />
           </div>
           <div>
-            <label className="mb-1.5 block font-body text-xs font-bold text-white">Email</label>
+            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">Email</label>
             <input
               className={fieldClass}
               placeholder="ada@everfield.io"
@@ -65,7 +65,7 @@ export default function FormScreen() {
             )}
           </div>
           <div>
-            <label className="mb-1.5 block font-body text-xs font-bold text-white">
+            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">
               Describe your startup &amp; product
             </label>
             <textarea
