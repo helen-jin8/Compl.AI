@@ -19,21 +19,24 @@ We serve exactly the segment the incumbents reject. We start where they say no.
 ## Why it can exist now
 
 The scoping work that justified a $12k consultant decomposes into three layers,
-and only one of them needs a person:
+and the machine handles the first two on its own:
 
 - **Perception** — does this thing have a battery, a radio, a ship date, a child
-  audience? A model reads the page; a general-population panel verifies it in
-  minutes. Reading a product page is not expert work.
+  audience? A model reads the page and quotes the exact line that justifies each
+  attribute, so the read is auditable without trusting the model. Reading a product
+  page is not expert work.
 - **Rules** — which standards those attributes trigger. A deterministic, auditable
   lookup table. You can read it. No model decides it.
 - **Authority** — is the scope right and what does it cost? That comes from
-  accredited labs, whose accreditation is the thing legally on the line. No
-  consultant holds that authority anyway.
+  accredited labs, whose accreditation is the thing legally on the line, and from a
+  named expert who reviews and signs the finished report. No consultant holds the
+  labs' authority anyway.
 
 The expensive part was never the knowledge. It was the labor of applying it to one
-specific device. That labor is now a model call plus a lookup plus a two-dollar
-panel. So the firm can run without a compliance department — and price the work
-where the rejected segment can actually afford it.
+specific device. That labor is now a model call plus a lookup. A person enters
+once, at the end, to review and sign the deliverable — the one step where human
+judgment actually changes the outcome. So the firm runs without a compliance
+department, and prices the work where the rejected segment can afford it.
 
 ## The product is the message
 
@@ -55,13 +58,14 @@ entire trust argument, and we hold that line in every line of copy.
 
 ## The honest defaults
 
-Two moments define the brand. When a human panel catches something the model
-missed, we show the before and after rather than hide that the model was wrong.
-When no expert can review a paid report in time, we refund automatically and say
-so plainly — the same honesty the founder was denied by the consultancy that
-wouldn't take them. Trust is the moat in a category built on opacity. We win it by
-being the one party in the chain that tells the truth about what it does and
-doesn't know.
+Two moments define the brand. Every attribute in a report cites the line on the
+page it came from, so a founder can check our read instead of trusting it — and
+when the expert review changes the draft, we show the before and after rather than
+hide that the first pass missed something. When no expert can review a paid report
+in time, we refund automatically and say so plainly — the same honesty the founder
+was denied by the consultancy that wouldn't take them. Trust is the moat in a
+category built on opacity. We win it by being the one party in the chain that tells
+the truth about what it does and doesn't know.
 
 ## The arc
 
