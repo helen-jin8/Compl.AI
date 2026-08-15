@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Glegoo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Gloock', serif;
+  --font-body: 'Glegoo', serif;
+  --font-sans: 'Inter', sans-serif;
+
+  --color-ink: #1f1a1a;
+  --color-ink-soft: #5b5b5b;
+  --color-sky: #75b9ff;
+  --color-deep: #114b8a;
+  --color-panel: #ffffff;
+  --color-chip: #e5f8ff;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+html:hover {
+  scrollbar-color: rgba(17, 75, 138, 0.35) transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: #eef5fd;
+}
+
+::selection {
+  background: rgba(117, 185, 255, 0.4);
+}
+
+@keyframes fc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fc-fade-up {
+  animation: fc-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
