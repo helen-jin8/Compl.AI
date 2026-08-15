@@ -1,11 +1,6 @@
-
-.env
+.DS_Store
 venv/
 .venv/
-.DS_Store
 __pycache__/
 *.pyc
-data/cache/
-data/outbox/
-data/state.json
-data/policy.json
+.env

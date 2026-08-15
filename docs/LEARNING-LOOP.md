@@ -1,5 +1,8 @@
 # Learning loop — outreach variant optimization
 
+> **Code location.** Lives in [`GTM_AGENT/`](../GTM_AGENT/). Run from there
+> (`cd GTM_AGENT`); `src/…` and `data/…` paths below are relative to it.
+
 The agent does not send a fixed email. It learns which framing earns a reply *for
 each kind of prospect*, and shifts future sends toward what works. This is the
 continuous version of the generation-1 → generation-2 test in

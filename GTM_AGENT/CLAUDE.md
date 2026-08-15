@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Read `docs/` before writing code. Order: 00-CONTEXT, 02-DECISIONS, 01-PLAN-5H.
+Read `../docs/` before writing code. Order: 00-CONTEXT, 02-DECISIONS, 01-PLAN-5H.
 
 ## What this is
 
@@ -18,7 +18,7 @@ input collected during the event that makes the project measurably better, with 
 clear before and after. Terac says to target the General Population for speed.
 
 Terac is the perception layer of the pipeline, in production, not a dev loop.
-Full design in `docs/05-TERAC-INTEGRATION.md`.
+Full design in `../docs/05-TERAC-INTEGRATION.md`.
 
 The accuracy chain splits three ways. Perception asks whether the device has a
 battery, a radio, a stated ship date, a child audience. Rules map attributes to
@@ -49,8 +49,8 @@ of a campaign page is an extraction task. Natural fit if time allows.
 
 ## Product shape, two tiers
 
-Decided Aug 15 afternoon, full spec in `docs/06-PRODUCT-SPEC.md`, build order in
-`docs/07-BUILD-SPEC.md`.
+Decided Aug 15 afternoon, full spec in `../docs/06-PRODUCT-SPEC.md`, build order in
+`../docs/07-BUILD-SPEC.md`.
 
 Free tier: the agent accepts the job, generates the scoping report immediately
 from its own models plus the rules table, ships same day. Expert signature block

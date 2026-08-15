@@ -1,6 +1,6 @@
 # Kickoff prompt for Claude Code
 
-Paste everything below the line into a fresh Claude Code session at the repo root.
+Paste everything below the line into a fresh Claude Code session in `GTM_AGENT/`.
 
 ---
 
@@ -8,8 +8,8 @@ You are picking up a hackathon build already in progress. Submissions lock at
 6:45 PM PDT today, Aug 15 2026. Optimise for shipping, not for elegance.
 
 **Read these first, in this order, before writing any code:**
-`CLAUDE.md`, `docs/06-PRODUCT-SPEC.md`, `docs/07-BUILD-SPEC.md`,
-`docs/02-DECISIONS.md`. Then skim `docs/03-DEMO-SCRIPT.md` so you know what the
+`CLAUDE.md`, `../docs/06-PRODUCT-SPEC.md`, `../docs/07-BUILD-SPEC.md`,
+`../docs/02-DECISIONS.md`. Then skim `../docs/03-DEMO-SCRIPT.md` so you know what the
 build has to produce on stage.
 
 **What this is.** A go-to-market agent system for an autonomous hardware
@@ -38,7 +38,7 @@ automatically if nobody accepts. The draft goes out before the expert accepts,
 deliberately: expert time is the scarce input and a finished draft turns hours of
 unknown work into twenty minutes of review.
 
-**Your task list is `docs/07-BUILD-SPEC.md`.** Task 1, the report renderer, is
+**Your task list is `../docs/07-BUILD-SPEC.md`.** Task 1, the report renderer, is
 already done in `src/report.py`. Start at Task 2, the expert loop. Work down the
 list in order and stop when the clock says stop rather than when the list ends.
 

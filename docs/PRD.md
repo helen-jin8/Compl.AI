@@ -3,6 +3,10 @@
 **Owner:** Gaurang Sumra (product) · **Build owner:** GTM agent engineer
 **Status:** Draft for team build · **Last updated:** 15 Aug 2026
 
+> **Code location.** The GTM agent lives in [`GTM_AGENT/`](../GTM_AGENT/). Run
+> commands from there (`cd GTM_AGENT`); `src/…` and `data/…` paths in this doc are
+> relative to `GTM_AGENT/`.
+
 This PRD specifies the **go-to-market agent** — the system that finds pre-launch
 hardware companies about to miss a certification deadline, scopes the standards
 they need, and reaches out with the answer already attached. The compliance
