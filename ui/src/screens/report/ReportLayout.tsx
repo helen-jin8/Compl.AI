@@ -14,12 +14,10 @@ export default function ReportLayout() {
 
   if (!report) return null
 
-  const openFollowUps = report.followUps.filter((q) => !q.answer).length
   const requiredCount = report.checks.filter((c) => c.status === 'required').length
 
   const navItems: { to: string; label: string; badge?: number }[] = [
     { to: '/report/summary', label: 'Project summary' },
-    { to: '/report/followups', label: 'Follow up', badge: openFollowUps },
     { to: '/report/standards', label: 'Standards', badge: requiredCount },
     { to: '/report/labs', label: 'Labs' },
   ]
