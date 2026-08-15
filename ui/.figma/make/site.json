@@ -1,0 +1,10 @@
+{
+  "description": "Streamlines hardware startup compliance by collecting founder info, generating expert reports, and detailing necessary standards and follow-up questions.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
