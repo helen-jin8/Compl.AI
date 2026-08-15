@@ -119,6 +119,18 @@ class Policy:
         p = Path(path)
         return cls.from_dict(json.loads(p.read_text())) if p.exists() else cls()
 
+    def totals(self) -> dict:
+        """Overall replies / sends / reply-rate across all arms (priors excluded)."""
+        replies = sends = 0.0
+        for a, b in self.arms.values():
+            replies += a - 1
+            sends += (a - 1) + (b - 1)
+        return {
+            "replies": int(replies),
+            "sends": int(sends),
+            "reply_rate": (replies / sends) if sends else None,
+        }
+
     def summary(self, variants: list[str] | None = None) -> list[dict]:
         """Per-segment view for the dashboard / logs: chosen arm, rates, trials."""
         variants = variants or VARIANTS

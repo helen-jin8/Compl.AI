@@ -48,8 +48,13 @@
 <div class="grid" id="tiles"></div>
 
 <section>
-  <h2>Terac panel corrections, the before and after</h2>
-  <div id="corrections"></div>
+  <h2>Learning loop · which email hook wins, by segment</h2>
+  <div id="learning"></div>
+</section>
+
+<section>
+  <h2>Terac expert review · the deliverable before and after</h2>
+  <div id="review"></div>
 </section>
 
 <section>
@@ -65,6 +70,8 @@
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const pct = x => (x === null || x === undefined) ? "—" : (x*100).toFixed(0)+"%";
+const HOOK = {A: "A · absence hook", B: "B · cost hook"};
 
 function tile(k, v, n){
   return `<div class="tile"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div>${
@@ -75,43 +82,63 @@ function render(state){
   const P = state.prospects || [];
   const at = s => P.filter(p => p.stage === s).length;
   const tierA = P.filter(p => p.tier === "A");
-  const labelled = P.filter(p => p.panel_attributes);
-  const corrected = P.filter(p => (p.attributes_corrected || []).length);
-  const mock = P.some(p => p.panel_source === "mock");
-
-  const agree = labelled.flatMap(p =>
-    Object.values(p.panel_attributes).map(v => v.agreement).filter(x => x > 0));
-  const meanAgree = agree.length ? (agree.reduce((a,b)=>a+b,0)/agree.length) : null;
+  const L = state.learning;
+  const rr = L && L.totals ? L.totals.reply_rate : null;
 
   $("#tiles").innerHTML = [
     tile("Sourced", P.length),
     tile("Tier A", tierA.length, "radio or battery, no FCC grant, shipping soon"),
-    tile("Panel labelled", labelled.length, mock ? "MOCK PANEL, not for demo" : "Terac general population"),
-    tile("Panel corrections", corrected.length, "model attribute overridden by humans"),
-    tile("Panel agreement", meanAgree === null ? "—" : (meanAgree*100).toFixed(0)+"%", "mean, committed answers"),
     tile("Contacted", at("contacted") + at("drafted")),
-    tile("Human employees", "0", "perception bought per task"),
+    tile("Reply rate", pct(rr), L && L.totals ? `${L.totals.replies}/${L.totals.sends} sends, learned` : "awaiting replies"),
+    tile("Hooks learned", L && L.segments ? L.segments.length : 0, "segments with a best variant"),
+    tile("Human employees", "0", "human review bought per deliverable"),
   ].join("");
 
-  $("#corrections").innerHTML = corrected.length ? corrected.map(p => {
-    const before = new Set(p.standards_before || []);
-    const after  = new Set(p.standards_after  || []);
-    const gained = [...after].filter(x => !before.has(x));
-    const lost   = [...before].filter(x => !after.has(x));
+  // Learning loop: which email hook the bandit prefers per segment
+  const segs = (L && L.segments) || [];
+  const cell = (best, v, rate, nn) =>
+    `${best === v ? `<strong>${pct(rate)}</strong>` : `<span class="muted">${pct(rate)}</span>`}` +
+    ` <span class="muted" style="font-size:11px">n=${nn}</span>`;
+  $("#learning").innerHTML = segs.length ? `<table><thead><tr>
+      <th>Segment</th><th>Winning hook</th><th>Variant A</th><th>Variant B</th><th>Sends</th>
+      </tr></thead><tbody>` +
+    segs.map(s => `<tr>
+      <td class="mono">${esc(s.segment)}</td>
+      <td><span class="pill gain">${esc(HOOK[s.best] || s.best)}</span></td>
+      <td>${cell(s.best, "A", s.rate_A, s.n_A)}</td>
+      <td>${cell(s.best, "B", s.rate_B, s.n_B)}</td>
+      <td class="muted">${(s.n_A||0)+(s.n_B||0)}</td>
+    </tr>`).join("") + `</tbody></table>
+    <div class="muted" style="font-size:12px;margin-top:8px">Thompson-sampling bandit over
+      email variants, keyed by device segment. Reward is a real Gmail reply; the winning hook
+      takes more of the next batch.</div>`
+    : `<div class="muted">No sends yet. Once outreach runs, the agent explores both hooks per
+      segment and concentrates on the one that earns replies.</div>`;
+
+  // Terac expert review: the deliverable-level before/after (draft -> signed)
+  const reviewed = P.filter(p => p.expert_state || p.report_v2 || p.expert_name);
+  $("#review").innerHTML = reviewed.length ? reviewed.map(p => {
+    const sim = p.approval_simulated ? ' <span class="pill flag">approval simulated</span>' : "";
+    const cred = p.expert_credential ? `, ${esc(p.expert_credential)}` : "";
+    const comments = (p.expert_comments || []).map(c => `<li>${esc(c)}</li>`).join("");
     return `<div style="margin-bottom:14px">
       <div><strong>${esc(p.company || p.url)}</strong>
-        <span class="muted">${esc(p.product || "")}</span></div>
+        <span class="muted">${esc(p.product || "")}</span>${sim}</div>
       <div class="muted" style="font-size:12px;margin:3px 0">
-        panel overrode: <span class="mono">${esc((p.attributes_corrected||[]).join(", "))}</span></div>
-      <div>${gained.map(g => `<span class="pill gain">+ ${esc(g)}</span>`).join(" ")}
-           ${lost.map(l => `<span class="pill loss">− ${esc(l)}</span>`).join(" ")}</div>
+        ${esc(p.expert_state === "signed" ? "signed" : (p.expert_state || "posted"))}${
+          p.expert_name ? ` by ${esc(p.expert_name)}${cred}` : ""}
+        &middot; draft <span class="pill gain">report_v1</span> → ${
+          p.report_v2 ? '<span class="pill gain">signed report_v2</span>'
+                      : '<span class="pill flag">awaiting sign-off</span>'}</div>
+      ${comments ? `<ul style="margin:4px 0 0;padding-left:18px">${comments}</ul>` : ""}
     </div>`;
-  }).join("") : `<div class="muted">No corrections yet. A high agreement rate is
-    also a result: report the agreement number rather than inventing a catch.</div>`;
+  }).join("") : `<div class="muted">No expert reviews yet. On the paid enhance, the report is
+    posted to Terac with the draft attached; the reviewer's name, verbatim notes, and the
+    signed version appear here — the one human-in-the-loop step.</div>`;
 
   $("#table").innerHTML = `<table><thead><tr>
       <th>Company</th><th>Product</th><th>Tier</th><th>Ship</th>
-      <th>FCC</th><th>Standards</th><th>Stage</th></tr></thead><tbody>` +
+      <th>FCC</th><th>Standards</th><th>Hook</th><th>Stage</th></tr></thead><tbody>` +
     P.map(p => `<tr>
       <td>${esc(p.company)}</td>
       <td class="muted">${esc(p.product)}</td>
@@ -122,24 +149,35 @@ function render(state){
             : (p.fcc && p.fcc.grants === 0
               ? '<span class="pill gain">no grant</span>'
               : esc(p.fcc?.grants ?? "—"))}</td>
-      <td class="mono">${esc((p.standards_after || []).join(", ") || "—")}</td>
-      <td class="muted">${esc(p.stage || "—")}${
-        p.sent_pre_label ? ' <span class="pill flag">pre-label</span>' : ""}</td>
+      <td class="mono">${esc((p.standards || p.standards_after || []).join(", ") || "—")}</td>
+      <td>${p.variant ? esc(p.variant) : "—"}</td>
+      <td class="muted">${esc(p.stage || "—")}</td>
     </tr>`).join("") + `</tbody></table>`;
 
   $("#events").innerHTML = (state.events || []).slice(-25).reverse()
     .map(e => `${esc(e.kind)} &middot; ${esc(e.detail)}`).join("<br>") || "no events";
 }
 
-fetch("../data/state.json")
-  .then(r => r.json())
-  .then(render)
-  .catch(() => {
-    $("#tiles").innerHTML =
-      `<div class="tile err">state.json not readable. Serve the repo root
-       (<span class="mono">python3 -m http.server</span>) rather than opening
-       this file directly, so the fetch is not blocked.</div>`;
-  });
+// Prefer live pipeline state; fall back to the committed demo state so the
+// dashboard renders out of the box (before a run, or for the walkthrough).
+async function load(){
+  for (const src of ["../data/state.json", "../data/demo_state.json"]){
+    try {
+      const r = await fetch(src);
+      if (!r.ok) continue;
+      const state = await r.json();
+      if (src.endsWith("demo_state.json"))
+        document.querySelector(".sub").insertAdjacentHTML("beforeend",
+          ' <span class="pill flag">demo data</span>');
+      return render(state);
+    } catch (e) { /* try next */ }
+  }
+  $("#tiles").innerHTML =
+    `<div class="tile err">No state found. Serve the repo root
+     (<span class="mono">python3 -m http.server</span>) rather than opening this
+     file directly, so the fetch is not blocked.</div>`;
+}
+load();
 </script>
 </body>
 </html>

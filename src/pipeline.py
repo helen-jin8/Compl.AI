@@ -136,8 +136,18 @@ def cmd_outreach(args, state):
         p["stage"] = "contacted" if status == "sent" else "drafted"
         sent += 1
     policy.save(POLICY_PATH)
+    _write_learning(state, policy)
     log(state, "outreach", f"{sent} messages, send={args.send}")
     print(f"{sent} messages, send={args.send}")
+
+
+def _write_learning(state, policy):
+    """Mirror the policy into state so the dashboard (state.json only) can show it."""
+    state["learning"] = {
+        "variants": learning.VARIANTS,
+        "totals": policy.totals(),
+        "segments": policy.summary(),
+    }
 
 
 def cmd_learn(args, state):
@@ -162,6 +172,7 @@ def cmd_learn(args, state):
         p["outcome_learned"] = True
         learned += 1
     policy.save(POLICY_PATH)
+    _write_learning(state, policy)
     for row in policy.summary():
         print(
             f"  {row['segment']:<18} best={row['best']}  "

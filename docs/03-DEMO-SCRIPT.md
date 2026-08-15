@@ -41,35 +41,54 @@ The line to land on beat 3:
 If wifi is bad, run `--offline` and say you are replaying from cache. Judges
 respect the engineering decision more than they penalize the replay.
 
-## The Terac layer, 60 seconds
+## The accuracy chain and the human review, 60 seconds
 
-This is the mandatory criteria and it is also the best idea in the project, so
-give it real time. Show the standards-before against standards-after comparison
-for one prospect the panel corrected.
+This is where the mandatory human-input criteria lives, so give it real time.
 
-> The obvious question with a compliance product is who checks the work. So we
-> split it into three layers and looked at which one actually needs a person.
+> The obvious question with a compliance product is who checks the work. We split
+> it into three layers and asked which one actually needs a person.
 >
-> Perception. Does this thing have a battery, does it have a radio, when does it
-> ship. Rules. Which standards those attributes trigger. Authority. Is the scope
-> right and what does it cost.
+> Perception. Does it have a battery, a radio, when does it ship. The model reads
+> the page, and every attribute it uses quotes the exact line it came from, so you
+> can check the read instead of trusting it. Rules. Which standards those trigger.
+> That's a deterministic table in the repo, you can read it. Authority. Is the
+> scope right and what does it cost. That comes from accredited labs, and from a
+> named expert who reviews and signs the finished report.
 >
-> Rules are a lookup table. It's in the repo, it's deterministic, you can read it.
-> Authority comes from accredited labs, and no consultant has that authority
-> anyway. Perception is the only layer that needs a human, and reading a product
-> page is not expert work.
->
-> So every prospect goes to a Terac panel before the analysis runs. Five
-> questions, anyone can answer them. On this one the panel spotted a rechargeable
-> pack our model missed. That added UN 38.3, which is the transport standard, and
-> without it no carrier will fly the product. The model would have sent this
-> founder a report that let them miss their ship date.
->
-> The company has no employees. It hires perception by the task through an API.
+> So the engine runs with no human in the loop. The one place a person adds
+> something a model can't is signing the deliverable, and that's the paid tier.
+> Here's a report before review, and here's the same report after a named reviewer
+> marked it up and signed it. That draft-to-signed diff is the human input, and
+> it's what turns a good scope into one a founder will pay to stand behind.
 
-If the panel caught nothing, say so and show the agreement rate instead. A high
-agreement rate is still a measurement, and claiming a catch you did not get is
-the one thing that will lose you the room.
+Show the expert-review section on the dashboard: draft `report_v1` → signed
+`report_v2`, the reviewer's name, and their verbatim notes. If the approval was
+simulated for the event, the row carries a visible "approval simulated" badge —
+point at it. A labelled simulation reads as discipline; an unlabelled one a judge
+uncovers costs the track.
+
+If no reviewer accepted in time, show the honest degradation screen: we refund
+automatically and say so. That is the same honesty the founder was denied by the
+consultancy, and it closes the demo back to the cold open.
+
+## The learning loop, 30 seconds
+
+Open the dashboard's learning section.
+
+> The email is the product, so we optimize the email the way you'd optimize a
+> product. There are two framings, one opens on the missing FCC grant, one on the
+> testing weeks against the ship date. We don't guess which works. A bandit sends
+> both, watches which one earns replies for each kind of device, and shifts the
+> next batch toward the winner. Battery devices with a hard carrier deadline reply
+> to the cost framing; the others to the absence framing. It learned that from
+> replies, not from us.
+>
+> On our own eval that's about a fifty percent lift in reply rate over sending the
+> two at random. And the reward is a real reply from a real founder, the one
+> signal in this whole funnel we refuse to fake.
+
+The per-segment table shows the winning hook and the reply rate it's converging
+on. Reply rate is the north-star number.
 
 ## Revenue, 30 seconds
 
@@ -135,5 +154,5 @@ solvable in five hours.
 - Do not claim you certify anything.
 - Do not claim more sends than you made.
 - Do not show a slide with an unlabeled y-axis to a Google DeepMind PM.
-- Do not run out of time before the Terac chart. It is the mandatory criteria and
-  a project that skips it is not eligible.
+- Do not run out of time before the human-review before/after. It is the mandatory
+  human-input criteria and a project that skips it is not eligible.
