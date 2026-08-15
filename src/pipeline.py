@@ -17,10 +17,11 @@ from __future__ import annotations
 import argparse
 import os
 
-from . import analyst, fcc, outreach, sourcer, terac
-from .store import load_state, log, save_state, upsert
+from . import analyst, fcc, learning, outreach, sourcer, terac
+from .store import DATA, load_state, log, save_state, upsert
 
 SENDER = os.environ.get("SENDER_NAME", "")
+POLICY_PATH = DATA / "policy.json"
 
 
 def cmd_source(args, state):
@@ -110,6 +111,11 @@ def cmd_analyze(args, state):
 
 
 def cmd_outreach(args, state):
+    # The learning loop picks the variant. The bandit samples each segment's
+    # posterior over P(reply) and sends the framing it currently believes wins
+    # for this kind of prospect. Outcomes fold back in via `learn`. See
+    # src/learning.py and docs/LEARNING-LOOP.md.
+    policy = learning.Policy.load(POLICY_PATH)
     sent = 0
     for i, p in enumerate(state["prospects"]):
         if p.get("tier") != "A" or not p.get("determination"):
@@ -117,17 +123,52 @@ def cmd_outreach(args, state):
         if sent >= outreach.MAX_SENDS:
             print(f"stopping at MAX_SENDS={outreach.MAX_SENDS}")
             break
-        variant = "A" if i % 2 == 0 else "B"
+        seg = learning.segment_of(p)
+        variant = policy.choose(seg)
         subject, body = outreach.render(
             p, p["determination"], p["lab"], variant, SENDER, p.get("sleeper")
         )
         to = p.get("email") or f"unknown+{i}@example.com"
         status = outreach.deliver(to, subject, body, send=args.send and bool(p.get("email")))
-        p.update({"variant": variant, "subject": subject, "body": body, "outreach": status})
+        p.update(
+            {"segment": seg, "variant": variant, "subject": subject, "body": body, "outreach": status}
+        )
         p["stage"] = "contacted" if status == "sent" else "drafted"
         sent += 1
+    policy.save(POLICY_PATH)
     log(state, "outreach", f"{sent} messages, send={args.send}")
     print(f"{sent} messages, send={args.send}")
+
+
+def cmd_learn(args, state):
+    """Close the loop: fold observed reply outcomes into the outreach policy.
+
+    Reads the real reply signal for every contacted prospect we have observed but
+    not yet learned from, updates the bandit, and persists it. A prospect is
+    'observed' once Gmail thread polling has populated its `engagement` (reply or
+    no reply after the window) — see docs/PRD.md §7.6. Idempotent: each outcome is
+    folded in exactly once, guarded by `outcome_learned`.
+    """
+    policy = learning.Policy.load(POLICY_PATH)
+    learned = 0
+    for p in state["prospects"]:
+        if not p.get("variant") or p.get("outcome_learned"):
+            continue
+        eng = p.get("engagement")
+        if eng is None:  # not yet observed; do not count silence as a rejection early
+            continue
+        seg = p.get("segment") or learning.segment_of(p)
+        policy.update(seg, p["variant"], bool(eng.get("replied")))
+        p["outcome_learned"] = True
+        learned += 1
+    policy.save(POLICY_PATH)
+    for row in policy.summary():
+        print(
+            f"  {row['segment']:<18} best={row['best']}  "
+            f"A={row['rate_A']}(n={row['n_A']})  B={row['rate_B']}(n={row['n_B']})"
+        )
+    log(state, "learn", f"folded {learned} outcomes into policy")
+    print(f"learned from {learned} outcomes")
 
 
 def cmd_terac_comprehend(args, state):
@@ -154,6 +195,7 @@ COMMANDS = {
     "terac-pull": cmd_terac_pull,
     "analyze": cmd_analyze,
     "outreach": cmd_outreach,
+    "learn": cmd_learn,
     "terac-comprehend": cmd_terac_comprehend,
     "run": cmd_run,
 }

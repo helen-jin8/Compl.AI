@@ -245,15 +245,25 @@ segment:
 default writes drafts to an outbox. A hard `MAX_SENDS` cap — cold volume from a
 single Gmail address lands in spam and a spam-foldered demo shows zero replies.
 Warm the address and keep volume low.
+
+**Variant selection is a learning loop.** Which of the two hooks to send is not
+fixed — a contextual bandit (`src/learning.py`) picks per segment and shifts toward
+whatever earns replies, folding in each observed outcome via `pipeline learn`. It
+is **built and tested** (≈+49% reply rate vs. fixed 50/50 on the eval; converges
+per segment). Full design and the one integration point the team owns (Gmail reply
+polling → `engagement.replied`) are in `docs/LEARNING-LOOP.md`.
 *Acceptance:* drafts render for every tier-A record; `--send` gated; caps
-enforced; every draft has the caveat + footer.
+enforced; every draft has the caveat + footer; variant chosen by the policy.
 
 ### 7.6 Engage
 Reply tracking is native: poll the `gmail_thread_id` for a reply and write
 `engagement.replied` + a `reply_snippet` onto the record. A reply is the north
-star — surface it immediately. **Never simulate a reply from a stranger.**
+star — surface it immediately. **Never simulate a reply from a stranger.** This is
+also the reward signal that closes the learning loop (`docs/LEARNING-LOOP.md`):
+once `engagement` is observed, `pipeline learn` folds the outcome into the variant
+policy.
 *Acceptance:* engagement fields update from real Gmail threads; replies appear on
-the dashboard.
+the dashboard; observed outcomes are learnable exactly once.
 
 ### 7.7 Re-engage (highest-value message)
 When an expert has reviewed a report, draft a follow-up that **quotes the expert
