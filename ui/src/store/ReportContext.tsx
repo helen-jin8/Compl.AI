@@ -13,6 +13,8 @@ interface ReportState {
   report: ComplianceReport | null
   stageIndex: number
   expertEta: string | null
+  /** Non-null when a backend call failed; the UI must surface it. */
+  error: string | null
   /** Step 1: agent reads the description and produces follow-up questions. */
   analyze: (intake: FounderIntake) => Promise<void>
   /** Step 2: founder's answers are folded in and the full report is built. */
@@ -29,6 +31,7 @@ export function ReportProvider({ children }: { children: ReactNode }) {
   const [report, setReport] = useState<ComplianceReport | null>(null)
   const [stageIndex, setStageIndex] = useState(0)
   const [expertEta, setExpertEta] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const analyze = useCallback(async (nextIntake: FounderIntake) => {
     setIntake(nextIntake)
@@ -36,10 +39,13 @@ export function ReportProvider({ children }: { children: ReactNode }) {
     setReport(null)
     setStageIndex(0)
     setExpertEta(null)
+    setError(null)
     setAnalyzing(true)
     try {
       const questions = await complianceApi.generateFollowUps(nextIntake)
       setFollowUps(questions)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not reach the compliance service.')
     } finally {
       setAnalyzing(false)
     }
@@ -52,10 +58,19 @@ export function ReportProvider({ children }: { children: ReactNode }) {
       setReport(null)
       setStageIndex(0)
       setExpertEta(null)
+      setError(null)
 
-      const generated = await complianceApi.generateReport(intake, answered, (index) =>
-        setStageIndex(index),
-      )
+      let generated: ComplianceReport
+      try {
+        generated = await complianceApi.generateReport(intake, answered, (index) =>
+          setStageIndex(index),
+        )
+      } catch (err) {
+        // Without this the promise rejects unhandled and the loader spins
+        // forever with nothing on screen explaining why.
+        setError(err instanceof Error ? err.message : 'Report generation failed.')
+        return
+      }
       setReport(generated)
 
       // Kick off the human-in-the-loop expert review in the background.
@@ -74,6 +89,7 @@ export function ReportProvider({ children }: { children: ReactNode }) {
     setReport(null)
     setStageIndex(0)
     setExpertEta(null)
+    setError(null)
   }, [])
 
   return (
@@ -85,6 +101,7 @@ export function ReportProvider({ children }: { children: ReactNode }) {
         report,
         stageIndex,
         expertEta,
+        error,
         analyze,
         finalize,
         reset,

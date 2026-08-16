@@ -6,7 +6,7 @@ import { useReport } from '../store/ReportContext'
 
 export default function GeneratingScreen() {
   const navigate = useNavigate()
-  const { report, stageIndex, intake } = useReport()
+  const { report, stageIndex, intake, error } = useReport()
   const stages = complianceApi.stages
 
   // If someone deep-links here without submitting the form, send them back.
@@ -18,6 +18,24 @@ export default function GeneratingScreen() {
   useEffect(() => {
     if (report) navigate('/report/summary', { replace: true })
   }, [report, navigate])
+
+  // A failed call must say so rather than spin forever.
+  if (error) {
+    return (
+      <Shell maxWidth="max-w-2xl">
+        <div className="fc-fade-up mt-8 rounded-2xl border border-rose-200 bg-white p-6 shadow-2xl shadow-deep/25 sm:p-9">
+          <h1 className="font-body text-2xl font-bold text-rose-700">Report generation failed</h1>
+          <p className="mt-3 font-sans text-sm leading-relaxed text-ink-soft">{error}</p>
+          <button
+            onClick={() => navigate('/start')}
+            className="mt-5 rounded-lg bg-deep px-5 py-2.5 font-body text-sm font-bold text-white"
+          >
+            Start over
+          </button>
+        </div>
+      </Shell>
+    )
+  }
 
   return (
     <Shell maxWidth="max-w-2xl">
