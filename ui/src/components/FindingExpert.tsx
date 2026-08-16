@@ -18,7 +18,7 @@ export default function FindingExpert({ expert }: { expert: Expert }) {
       ? 'finding an expert…'
       : stage === 'found'
         ? `${expert.name.split(' ')[0]} is reviewing`
-        : "Patricia's Feedback"
+        : "Ask Patricia"
 
   // Feedback is ready once the expert has finished reviewing — the card becomes clickable.
   const ready = stage === 'reviewing'

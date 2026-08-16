@@ -1,4 +1,4 @@
-// Mock backend for hardware.check.
+// Mock backend for compl.ai.
 // A single class stands in for the real compliance-analysis service so the UI
 // can be built and demoed end to end without a live backend.
 
@@ -317,7 +317,7 @@ export class ComplianceApi {
         avatar:
           'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=160&h=160&fit=crop&auto=format',
         note:
-          'Hi, thanks for trying hardware.check! I reviewed your compliance docs and added a couple of ' +
+          'Hi, thanks for trying compl.ai! I reviewed your compliance docs and added a couple of ' +
           'follow-up questions so we can tighten the battery and enclosure scope. The standards on your ' +
           'report card look correct for a US + EU launch — answer the two questions and I will confirm the final plan.',
       },

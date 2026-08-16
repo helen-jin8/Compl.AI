@@ -16,7 +16,7 @@ export default function Shell({
           to="/"
           className="font-display text-2xl text-white transition-opacity hover:opacity-80 sm:text-3xl"
         >
-          hardware<span className="text-chip">.check</span>
+          compl<span className="text-chip">.ai</span>
         </Link>
         <span className="hidden font-body text-xs text-white/80 sm:block">
           AI compliance reports · expert reviewed
