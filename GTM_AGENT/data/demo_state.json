@@ -1,0 +1,288 @@
+{
+  "prospects": [
+    {
+      "url": "https://kickstarter.com/projects/lumen-labs",
+      "company": "Lumen Labs",
+      "product": "Lumen Pack",
+      "source": "kickstarter",
+      "ship_month": "2026-11",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": true,
+        "lithium_cell": true,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UN 38.3",
+        "UL 2054",
+        "IEC 62133-2",
+        "UL 62368-1"
+      ],
+      "segment": "cold|batt|radio",
+      "variant": "B",
+      "offer_tier": "free",
+      "outreach": "sent",
+      "stage": "replied",
+      "engagement": {
+        "replied": true,
+        "observed": true
+      }
+    },
+    {
+      "url": "https://kickstarter.com/projects/cadence-audio",
+      "company": "Cadence Audio",
+      "product": "Cadence Buds",
+      "source": "kickstarter",
+      "ship_month": "2026-10",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": true,
+        "lithium_cell": true,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UN 38.3",
+        "UL 2054",
+        "IEC 62133-2",
+        "UL 62368-1"
+      ],
+      "segment": "cold|batt|radio",
+      "variant": "B",
+      "offer_tier": "free",
+      "outreach": "sent",
+      "stage": "contacted",
+      "engagement": {
+        "replied": false,
+        "observed": true
+      }
+    },
+    {
+      "url": "https://kickstarter.com/projects/trailwatch",
+      "company": "Trailwatch",
+      "product": "Trailwatch Cam",
+      "source": "kickstarter",
+      "ship_month": "2026-12",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": true,
+        "lithium_cell": false,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UL 62368-1"
+      ],
+      "segment": "cold|nobatt|radio",
+      "variant": "A",
+      "offer_tier": "free",
+      "outreach": "sent",
+      "stage": "contacted",
+      "engagement": {
+        "replied": false,
+        "observed": true
+      }
+    },
+    {
+      "url": "https://kickstarter.com/projects/northwind",
+      "company": "Northwind",
+      "product": "Northwind Sensor",
+      "source": "kickstarter",
+      "ship_month": "2027-01",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": true,
+        "lithium_cell": false,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UL 62368-1"
+      ],
+      "segment": "cold|nobatt|radio",
+      "variant": "A",
+      "offer_tier": "free",
+      "outreach": "sent",
+      "stage": "replied",
+      "engagement": {
+        "replied": true,
+        "observed": true
+      }
+    },
+    {
+      "url": "https://kickstarter.com/projects/volt-micro",
+      "company": "Volt Micro",
+      "product": "Volt Scooter",
+      "source": "kickstarter",
+      "ship_month": "2026-11",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": false,
+        "lithium_cell": true,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UN 38.3",
+        "UL 2054",
+        "IEC 62133-2",
+        "UL 62368-1"
+      ],
+      "segment": "cold|batt|noradio",
+      "variant": "B",
+      "offer_tier": "free",
+      "outreach": "sent",
+      "stage": "contacted",
+      "engagement": {
+        "replied": false,
+        "observed": true
+      }
+    },
+    {
+      "url": "https://kickstarter.com/projects/aeris",
+      "company": "Aeris",
+      "product": "Aeris Drone",
+      "source": "linkedin_engagement",
+      "ship_month": "2026-10",
+      "tier": "A",
+      "fcc": {
+        "grants": 0,
+        "checked": true,
+        "source": "fcc_eas"
+      },
+      "attributes": {
+        "intentional_radiator": true,
+        "lithium_cell": true,
+        "mains_or_usb_powered_electronics": true
+      },
+      "standards": [
+        "47 CFR Part 15 Subpart C",
+        "FCC KDB 447498",
+        "UN 38.3",
+        "UL 2054",
+        "IEC 62133-2",
+        "UL 62368-1"
+      ],
+      "segment": "warm|batt|radio",
+      "variant": "B",
+      "offer_tier": "enhanced",
+      "outreach": "drafted",
+      "stage": "enhanced",
+      "engagement": {
+        "replied": true,
+        "observed": true
+      },
+      "expert_state": "signed",
+      "expert_name": "Dana Whitfield",
+      "expert_credential": "iNARTE-certified EMC engineer, 12 years",
+      "expert_comments": [
+        "The UN 38.3 call is right, but T.6 impact is the sub-test most cell vendors quietly skip. Ask for the report by section, not a summary certificate, or you will discover the gap at the carrier's dock.",
+        "If the BLE module is pre-certified you can file under FCC modular approval and drop the intentional-radiator retest entirely. Worth confirming the module's grant before you budget for Part 15 testing."
+      ],
+      "report_v1": "# Compliance scope: Aeris Drone \u2026",
+      "report_v2": "# Compliance scope: Aeris Drone \u2026 (signed)",
+      "approval_simulated": true
+    }
+  ],
+  "events": [
+    {
+      "at": 0,
+      "kind": "outreach",
+      "detail": "6 messages drafted, variant chosen by policy"
+    },
+    {
+      "at": 1,
+      "kind": "reply",
+      "detail": "Lumen Labs replied to variant B (cost hook)"
+    },
+    {
+      "at": 2,
+      "kind": "learn",
+      "detail": "folded 6 outcomes into policy; cold|batt|radio \u2192 B"
+    },
+    {
+      "at": 3,
+      "kind": "expert_signed",
+      "detail": "Aeris: signed by Dana Whitfield (approval simulated)"
+    }
+  ],
+  "learning": {
+    "variants": [
+      "A",
+      "B"
+    ],
+    "totals": {
+      "replies": 300,
+      "sends": 1500,
+      "reply_rate": 0.2
+    },
+    "segments": [
+      {
+        "segment": "cold|batt|noradio",
+        "best": "B",
+        "rate_A": 0.059,
+        "n_A": 15,
+        "rate_B": 0.228,
+        "n_B": 349
+      },
+      {
+        "segment": "cold|batt|radio",
+        "best": "B",
+        "rate_A": 0.068,
+        "n_A": 42,
+        "rate_B": 0.174,
+        "n_B": 349
+      },
+      {
+        "segment": "cold|nobatt|radio",
+        "best": "A",
+        "rate_A": 0.2,
+        "n_A": 333,
+        "rate_B": 0.091,
+        "n_B": 20
+      },
+      {
+        "segment": "warm|batt|radio",
+        "best": "B",
+        "rate_A": 0.122,
+        "n_A": 47,
+        "rate_B": 0.254,
+        "n_B": 345
+      }
+    ]
+  },
+  "meta": {
+    "demo": true
+  }
+}
