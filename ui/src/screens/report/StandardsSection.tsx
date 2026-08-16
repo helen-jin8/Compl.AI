@@ -31,8 +31,6 @@ export default function StandardsSection() {
           />
         ))}
       </div>
-
-      <AskExpert />
     </div>
   )
 }
@@ -87,49 +85,3 @@ function Meta({ label, value }: { label: string; value: string }) {
   )
 }
 
-function AskExpert() {
-  const [value, setValue] = useState('')
-  const [sent, setSent] = useState(false)
-
-  const send = () => {
-    if (!value.trim()) return
-    setSent(true)
-    setValue('')
-    setTimeout(() => setSent(false), 3500)
-  }
-
-  return (
-    <div className="mt-6 rounded-xl border border-ink/20 bg-white p-4">
-      <div className="flex items-center justify-between">
-        <p className="font-sans text-sm font-bold text-ink">Ask an expert</p>
-        <p className="font-sans text-xs text-ink-soft">gets back to you in 2–3 hours</p>
-      </div>
-      <div className="mt-2.5 flex items-center gap-2.5">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && send()}
-          placeholder="e.g. Can I bundle the Part 15B and 15C testing in one visit?"
-          className="fc-field flex-1"
-        />
-        <button
-          onClick={send}
-          aria-label="Send question to expert"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-deep text-white transition-transform hover:-translate-y-0.5"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3.4 20.4 21 12 3.4 3.6 3.4 10.2 15 12 3.4 13.8 3.4 20.4Z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
-      </div>
-      {sent && (
-        <p className="mt-2.5 font-sans text-xs font-bold text-emerald-600">
-          ✓ Sent to Patricia — she'll reply by email.
-        </p>
-      )}
-    </div>
-  )
-}

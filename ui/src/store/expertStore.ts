@@ -2,16 +2,16 @@ import { create } from 'zustand'
 
 export type ExpertStage = 'matching' | 'found' | 'reviewing'
 
-// Full loop is ~3 minutes, then it repeats (mocked human-in-the-loop demo).
+// Full loop is ~3 minutes, then it settles into reviewing (mocked human-in-the-loop demo).
 const STAGE_DURATION_MS: Record<ExpertStage, number> = {
-  matching: 1_000,
+  matching: 5_000,
   found: 2_000,
   reviewing: 3_000,
 }
 const NEXT_STAGE: Record<ExpertStage, ExpertStage> = {
   matching: 'found',
   found: 'reviewing',
-  reviewing: 'matching',
+  reviewing: 'reviewing',
 }
 
 interface ExpertState {
@@ -34,7 +34,10 @@ export const useExpertStore = create<ExpertState>((set, get) => ({
     const advance = () => {
       const next = NEXT_STAGE[get().stage]
       set({ stage: next, matched: get().matched || next !== 'matching' })
-      setTimeout(advance, STAGE_DURATION_MS[next])
+      // Once reviewing is reached, stay there instead of looping back to matching.
+      if (next !== 'reviewing') {
+        setTimeout(advance, STAGE_DURATION_MS[next])
+      }
     }
     setTimeout(advance, STAGE_DURATION_MS[get().stage])
   },

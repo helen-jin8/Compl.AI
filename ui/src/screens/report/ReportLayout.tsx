@@ -3,12 +3,10 @@ import { NavLink, Outlet, useNavigate } from 'react-router'
 import FindingExpert from '../../components/FindingExpert'
 import Shell from '../../components/Shell'
 import { useReport } from '../../store/ReportContext'
-import { useExpertStore } from '../../store/expertStore'
 
 export default function ReportLayout() {
   const navigate = useNavigate()
-  const { report, expertEta } = useReport()
-  const matched = useExpertStore((s) => s.matched)
+  const { report } = useReport()
 
   // Deep-linked without a generated report → send to the form.
   useEffect(() => {
@@ -19,22 +17,14 @@ export default function ReportLayout() {
 
   const requiredCount = report.checks.filter((c) => c.status === 'required').length
 
-  const navItems: { to: string; label: string; badge?: number }[] = [
+  const navItems: { to: string; label: string; badge?: number; dot?: boolean }[] = [
     { to: '/report/summary', label: 'Project summary' },
     { to: '/report/standards', label: 'Standards', badge: requiredCount },
     { to: '/report/labs', label: 'Labs' },
   ]
 
-  // Only shows up once the expert has actually matched with this project.
-  if (matched) {
-    navItems.push({ to: '/report/feedback', label: "Patricia's feedback" })
-  }
-
   return (
-    <Shell
-      maxWidth="max-w-[1400px]"
-      headerRight={<FindingExpert expert={report.expert} eta={expertEta} />}
-    >
+    <Shell maxWidth="max-w-[1400px]">
       <div className="fc-fade-up grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
         {/* Sidebar */}
         <aside className="h-fit rounded-2xl border border-ink/10 bg-white p-5 shadow-xl shadow-deep/15">
@@ -62,12 +52,16 @@ export default function ReportLayout() {
                       >
                         {item.badge}
                       </span>
+                    ) : item.dot ? (
+                      <span className="ml-2 h-2 w-2 shrink-0 rounded-full bg-red-500" />
                     ) : null}
                   </>
                 )}
               </NavLink>
             ))}
           </nav>
+
+          <FindingExpert expert={report.expert} />
         </aside>
 
         {/* Main panel */}
