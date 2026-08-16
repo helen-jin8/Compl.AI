@@ -1,0 +1,126 @@
+# Lab directory.
+#
+# Two different accreditations matter and conflating them is the fastest way to
+# look uninformed in front of a hardware founder.
+#
+#   NRTL - Nationally Recognized Testing Laboratory, OSHA recognised, issues the
+#          safety mark (UL mark, ETL mark, TUV mark, cCSAus).
+#   TCB  - Telecommunication Certification Body, FCC recognised, issues the
+#          equipment authorization and the FCC ID grant.
+#
+# Some organisations hold both. Recommending a single booking that covers safety
+# and radio is the practical advice a founder actually wants, so `one_stop: true`
+# is the field the analyst optimises for.
+#
+# Cost bands are order of magnitude for scoping conversation only. The quote is
+# the number. Never present these as prices.
+
+selection_rule: >
+  Prefer one_stop labs so the client makes one booking. Prefer startup_friendly
+  when the client is pre-revenue or below roughly one thousand units, because the
+  large labs will deprioritise or decline them, which is the same rejection that
+  brought them to us.
+
+labs:
+
+  - name: UL Solutions
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, battery]
+    note: The default answer and usually the slowest and priciest. Good for credibility, poor for a small campaign in a hurry.
+
+  - name: Intertek
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, battery, children]
+    note: Issues the ETL mark, which is equivalent to the UL mark for OSHA purposes. Founders often do not know this and overpay for the UL brand.
+
+  - name: TUV SUD
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, battery]
+
+  - name: TUV Rheinland
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, battery]
+
+  - name: CSA Group
+    accreditations: [NRTL]
+    one_stop: false
+    startup_friendly: false
+    covers: [safety, battery]
+    note: Strongest when Canada is in scope.
+
+  - name: SGS
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, children]
+
+  - name: Bureau Veritas
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio, children]
+
+  - name: Element Materials Technology
+    accreditations: [TCB]
+    one_stop: false
+    startup_friendly: true
+    covers: [emc, radio, battery]
+
+  - name: Eurofins MET Labs
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: true
+    covers: [safety, emc, radio, battery]
+    note: Good default recommendation for a funded campaign. Holds both accreditations and takes small clients.
+
+  - name: Nemko
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: true
+    covers: [safety, emc, radio]
+
+  - name: DEKRA
+    accreditations: [NRTL, TCB]
+    one_stop: true
+    startup_friendly: false
+    covers: [safety, emc, radio]
+
+  - name: PCTEST
+    accreditations: [TCB]
+    one_stop: false
+    startup_friendly: true
+    covers: [emc, radio]
+    note: Wireless specialist. Fast on Part 15 Subpart C. Pair with a safety lab.
+
+  - name: Washington Laboratories
+    accreditations: [TCB]
+    one_stop: false
+    startup_friendly: true
+    covers: [emc, radio]
+
+  - name: Compliance Testing LLC
+    accreditations: [TCB]
+    one_stop: false
+    startup_friendly: true
+    covers: [emc, radio]
+    note: Openly serves small clients. Frequently the right first call for a Kickstarter-scale project.
+
+  - name: QAI Laboratories
+    accreditations: [NRTL]
+    one_stop: false
+    startup_friendly: true
+    covers: [safety]
+
+  - name: Timco Engineering
+    accreditations: [TCB]
+    one_stop: false
+    startup_friendly: true
+    covers: [emc, radio]

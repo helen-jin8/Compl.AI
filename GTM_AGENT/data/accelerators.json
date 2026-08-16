@@ -1,0 +1,1297 @@
+[
+  {
+    "source": "accelerator",
+    "company": "Hermes Robotics",
+    "product": "Humanoid / general-purpose robotics",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://hermes-robotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/hermes-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2018,
+    "accelerator_signal": "Y Combinator W21",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Guilhem",
+    "founder_title": "Founder & CEO/CTO",
+    "linkedin_url": "https://www.linkedin.com/company/hermes-robotics",
+    "company_domain": "hermes-robotics.com",
+    "email": "guilhem@hermes-robotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Weave Robotics",
+    "product": "Home humanoid robot",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://weaverobots.com",
+    "creator_profile_url": "https://www.linkedin.com/company/weave-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": null,
+    "accelerator_signal": "Bay Area home-robotics startup",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Kaan",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/weave-robotics",
+    "company_domain": "weaverobots.com",
+    "email": "kaan@weaverobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "GyroPalm",
+    "product": "Wearable gesture-control device (IoT/AR)",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://gyropalm.com",
+    "creator_profile_url": "https://www.linkedin.com/company/gyropalm",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2015,
+    "accelerator_signal": "UIF Innovation Fellow",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Dominick",
+    "founder_title": "Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/gyropalm",
+    "company_domain": "gyropalm.com",
+    "email": null,
+    "enrichment_status": "apollo: company LinkedIn + verified work email (email unavailable)"
+  },
+  {
+    "source": "accelerator",
+    "company": "Adeeb Robotics",
+    "product": "Robotics hardware",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://adeebrobotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/adeeb-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2021,
+    "accelerator_signal": "Bay Area robotics startup",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Omar",
+    "founder_title": "Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/adeeb-robotics",
+    "company_domain": "adeebrobotics.com",
+    "email": "omar@adeebrobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Outrun Robotics",
+    "product": "Autonomous robotics",
+    "location": "Santa Clara, CA",
+    "country": "US",
+    "campaign_url": "https://outrun.bot",
+    "creator_profile_url": "https://www.linkedin.com/company/outrun-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": null,
+    "accelerator_signal": "Ex-Dexterity / Uber ATG / NVIDIA; Stanford",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Darshan",
+    "founder_title": "Co-founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/outrun-robotics",
+    "company_domain": "outrun.bot",
+    "email": "darshan@outrun.bot",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Sol Robotics",
+    "product": "Robotics hardware (PhD-led)",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://solrobotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/sol-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": null,
+    "accelerator_signal": "PhD Mechanical Engineer (Robotics)",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Justin",
+    "founder_title": "Co-Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/sol-robotics",
+    "company_domain": "solrobotics.com",
+    "email": "justin@solrobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Ember Robotics",
+    "product": "Robotics / hardware system observability",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://emberrobotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/ember-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2024,
+    "accelerator_signal": "Early-stage (founded 2024)",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Shivani",
+    "founder_title": "Co-Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/ember-robotics",
+    "company_domain": "emberrobotics.com",
+    "email": "shivani@emberrobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "OpenHome",
+    "product": "AI voice hardware for the home",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://openhome.com",
+    "creator_profile_url": "https://www.linkedin.com/company/openhome-ai",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": null,
+    "accelerator_signal": "Thiel Fellow",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Jesse",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/openhome-ai",
+    "company_domain": "openhome.com",
+    "email": "jesse@openhome.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Evolution Devices",
+    "product": "Wearable medical / rehab device",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://evolutiondevices.com",
+    "creator_profile_url": "https://www.linkedin.com/company/evolution-devices",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2017,
+    "accelerator_signal": "Medical-device wearable",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Pierluigi",
+    "founder_title": "Co-Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/evolution-devices",
+    "company_domain": "evolutiondevices.com",
+    "email": "pierluigi@evolutiondevices.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Oso Robotics",
+    "product": "Shipping / logistics robots",
+    "location": "Oakland, CA",
+    "country": "US",
+    "campaign_url": "https://osorobotics.ai",
+    "creator_profile_url": "https://www.linkedin.com/company/oso-robotics-inc",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2019,
+    "accelerator_signal": "CS PhD @ UC Berkeley",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Michael",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/oso-robotics-inc",
+    "company_domain": "osorobotics.ai",
+    "email": "mike@osorobotics.ai",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Vici Robotics",
+    "product": "Retail automation robots",
+    "location": "San Jose, CA",
+    "country": "US",
+    "campaign_url": "https://vicirobotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/vici-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2019,
+    "accelerator_signal": "Ex-Planet / Google",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Kyle",
+    "founder_title": "Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/vici-robotics",
+    "company_domain": "vicirobotics.com",
+    "email": "kyle@vicirobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Remedy Robotics",
+    "product": "Surgical / endovascular robotics",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://remedyrobotics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/remedyrobotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2021,
+    "accelerator_signal": "PhD Bioengineering; ex-Auris",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Jake",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/remedyrobotics",
+    "company_domain": "remedyrobotics.com",
+    "email": "jake@remedyrobotics.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Fort",
+    "product": "Wearable strength/health device",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://fort.cx",
+    "creator_profile_url": "https://www.linkedin.com/company/fortwearable",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2025,
+    "accelerator_signal": "Ex-Tesla / Rivian; wearable",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Paul",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/fortwearable",
+    "company_domain": "fort.cx",
+    "email": "paul@fort.cx",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "MirraViz",
+    "product": "Multi-view display hardware",
+    "location": "Fremont, CA",
+    "country": "US",
+    "campaign_url": "https://mirraviz.com",
+    "creator_profile_url": "https://www.linkedin.com/company/mirraviz",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2016,
+    "accelerator_signal": "Ex-Intel; display hardware",
+    "attributes": {
+      "intentional_radiator": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Michael",
+    "founder_title": "Co-Founder & CEO/CTO",
+    "linkedin_url": "https://www.linkedin.com/company/mirraviz",
+    "company_domain": "mirraviz.com",
+    "email": "michaelwang@mirraviz.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Mission Robotics",
+    "product": "Marine robotics (ROV/AUV)",
+    "location": "Union City, CA",
+    "country": "US",
+    "campaign_url": "https://missionrobotics.us",
+    "creator_profile_url": "https://www.linkedin.com/company/missionrobotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2020,
+    "accelerator_signal": "Ex-OpenROV / Sofar Ocean",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Brian",
+    "founder_title": "Co-Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/missionrobotics",
+    "company_domain": "missionrobotics.us",
+    "email": "brian@missionrobotics.us",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Spike Dynamics",
+    "product": "Artificial-muscle actuators (aerospace/medtech)",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://spikedynamics.com",
+    "creator_profile_url": "https://www.linkedin.com/company/spike-dynamics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2020,
+    "accelerator_signal": "NASA-validated actuator tech",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Alexander",
+    "founder_title": "Founder & CEO/CTO",
+    "linkedin_url": "https://www.linkedin.com/company/spike-dynamics",
+    "company_domain": "spikedynamics.com",
+    "email": "alexander.sergeev@spikedynamics.net",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Evodyne Robotics",
+    "product": "Robotics hardware & education",
+    "location": "Mountain View, CA",
+    "country": "US",
+    "campaign_url": "https://evodyne.co",
+    "creator_profile_url": "https://www.linkedin.com/company/evodynerobotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2017,
+    "accelerator_signal": "Prior exit (WeatherSphere); email extrapolated",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Raghav",
+    "founder_title": "Founder & CEO",
+    "linkedin_url": "https://www.linkedin.com/company/evodynerobotics",
+    "company_domain": "evodyne.co",
+    "email": "raghav.gupta@evodyne.co",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  },
+  {
+    "source": "accelerator",
+    "company": "Tespen Robotics",
+    "product": "Autonomous-mobility hardware",
+    "location": "San Francisco, CA",
+    "country": "US",
+    "campaign_url": "https://tespen.com",
+    "creator_profile_url": "https://www.linkedin.com/company/tespen-robotics",
+    "usd_pledged": null,
+    "backers": null,
+    "percent_funded": null,
+    "days_left": null,
+    "deadline": null,
+    "founded_year": 2025,
+    "accelerator_signal": "UC Berkeley Haas MBA 2026",
+    "attributes": {
+      "intentional_radiator": true,
+      "lithium_cell": true,
+      "mains_or_usb_powered_electronics": true
+    },
+    "attributes_note": "inferred from company profile, not a product page",
+    "standards": [
+      "47 CFR Part 15 Subpart C",
+      "FCC KDB 447498",
+      "UN 38.3",
+      "UL 2054",
+      "IEC 62133-2",
+      "UL 62368-1"
+    ],
+    "standards_detail": [
+      {
+        "id": "47 CFR Part 15 Subpart C",
+        "cite": "47 CFR 15.247/15.249",
+        "because": "intentional radiator (radio) certification"
+      },
+      {
+        "id": "FCC KDB 447498",
+        "cite": "KDB 447498 D01",
+        "because": "RF exposure evaluation"
+      },
+      {
+        "id": "UN 38.3",
+        "cite": "UN Manual of Tests and Criteria 38.3",
+        "because": "lithium battery transport testing"
+      },
+      {
+        "id": "UL 2054",
+        "cite": "UL 2054",
+        "because": "battery pack safety"
+      },
+      {
+        "id": "IEC 62133-2",
+        "cite": "IEC 62133-2:2017",
+        "because": "secondary lithium cell/battery safety"
+      },
+      {
+        "id": "UL 62368-1",
+        "cite": "UL 62368-1",
+        "because": "audio/video and IT equipment safety"
+      }
+    ],
+    "tier": "A",
+    "fcc": {
+      "checked": false,
+      "note": "absence-of-grant check pending"
+    },
+    "founder_name": "Alva",
+    "founder_title": "Co-Founder & CTO",
+    "linkedin_url": "https://www.linkedin.com/company/tespen-robotics",
+    "company_domain": "tespen.com",
+    "email": "alva@tespen.com",
+    "enrichment_status": "apollo: company LinkedIn + verified work email"
+  }
+]

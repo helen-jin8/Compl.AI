@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Company scoreboard</title>
+<style>
+  :root{
+    --bg:#0d0f12; --panel:#15181d; --line:#252a32;
+    --ink:#e8eaed; --dim:#8b93a1;
+    --pos:#4a9d7f; --warn:#c9873f; --info:#5b8dd6; --bad:#b5544f;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f7f8fa; --panel:#fff; --line:#e2e5ea; --ink:#14171c; --dim:#5f6774; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;padding:28px}
+  h1{font-size:19px;margin:0 0 2px;letter-spacing:-.01em}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:22px}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:22px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+  .tile .k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+  .tile .v{font-size:27px;font-weight:600;margin-top:5px;font-variant-numeric:tabular-nums}
+  .tile .n{color:var(--dim);font-size:12px;margin-top:3px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:9px;
+    padding:16px 18px;margin-bottom:14px}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin:0 0 12px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--dim);font-weight:500;padding:5px 8px 5px 0;font-size:11px;
+    text-transform:uppercase;letter-spacing:.05em}
+  td{padding:7px 8px 7px 0;border-top:1px solid var(--line);vertical-align:top}
+  .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:500}
+  .gain{background:color-mix(in srgb,var(--pos) 18%,transparent);color:var(--pos)}
+  .loss{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad)}
+  .flag{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .muted{color:var(--dim)}
+  .bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}
+  .bar i{display:block;height:100%;background:var(--info)}
+  .err{color:var(--bad)}
+</style>
+</head>
+<body>
+<h1>Autonomous hardware compliance firm</h1>
+<div class="sub">Zero Human Company Hackathon. Employees: 0. Human perception purchased per task via Terac.</div>
+
+<div class="grid" id="tiles"></div>
+
+<section>
+  <h2>Learning loop · which email hook wins, by segment</h2>
+  <div id="learning"></div>
+</section>
+
+<section>
+  <h2>Terac expert review · the deliverable before and after</h2>
+  <div id="review"></div>
+</section>
+
+<section>
+  <h2>Pipeline</h2>
+  <div id="table"></div>
+</section>
+
+<section>
+  <h2>Event log</h2>
+  <div id="events" class="mono muted"></div>
+</section>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const pct = x => (x === null || x === undefined) ? "—" : (x*100).toFixed(0)+"%";
+const HOOK = {A: "A · absence hook", B: "B · cost hook"};
+
+function tile(k, v, n){
+  return `<div class="tile"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div>${
+    n ? `<div class="n">${esc(n)}</div>` : ""}</div>`;
+}
+
+function render(state){
+  const P = state.prospects || [];
+  const at = s => P.filter(p => p.stage === s).length;
+  const tierA = P.filter(p => p.tier === "A");
+  const L = state.learning;
+  const rr = L && L.totals ? L.totals.reply_rate : null;
+
+  $("#tiles").innerHTML = [
+    tile("Sourced", P.length),
+    tile("Tier A", tierA.length, "radio or battery, no FCC grant, shipping soon"),
+    tile("Contacted", at("contacted") + at("drafted")),
+    tile("Reply rate", pct(rr), L && L.totals ? `${L.totals.replies}/${L.totals.sends} sends, learned` : "awaiting replies"),
+    tile("Hooks learned", L && L.segments ? L.segments.length : 0, "segments with a best variant"),
+    tile("Human employees", "0", "human review bought per deliverable"),
+  ].join("");
+
+  // Learning loop: which email hook the bandit prefers per segment
+  const segs = (L && L.segments) || [];
+  const cell = (best, v, rate, nn) =>
+    `${best === v ? `<strong>${pct(rate)}</strong>` : `<span class="muted">${pct(rate)}</span>`}` +
+    ` <span class="muted" style="font-size:11px">n=${nn}</span>`;
+  $("#learning").innerHTML = segs.length ? `<table><thead><tr>
+      <th>Segment</th><th>Winning hook</th><th>Variant A</th><th>Variant B</th><th>Sends</th>
+      </tr></thead><tbody>` +
+    segs.map(s => `<tr>
+      <td class="mono">${esc(s.segment)}</td>
+      <td><span class="pill gain">${esc(HOOK[s.best] || s.best)}</span></td>
+      <td>${cell(s.best, "A", s.rate_A, s.n_A)}</td>
+      <td>${cell(s.best, "B", s.rate_B, s.n_B)}</td>
+      <td class="muted">${(s.n_A||0)+(s.n_B||0)}</td>
+    </tr>`).join("") + `</tbody></table>
+    <div class="muted" style="font-size:12px;margin-top:8px">Thompson-sampling bandit over
+      email variants, keyed by device segment. Reward is a real Gmail reply; the winning hook
+      takes more of the next batch.</div>`
+    : `<div class="muted">No sends yet. Once outreach runs, the agent explores both hooks per
+      segment and concentrates on the one that earns replies.</div>`;
+
+  // Terac expert review: the deliverable-level before/after (draft -> signed)
+  const reviewed = P.filter(p => p.expert_state || p.report_v2 || p.expert_name);
+  $("#review").innerHTML = reviewed.length ? reviewed.map(p => {
+    const sim = p.approval_simulated ? ' <span class="pill flag">approval simulated</span>' : "";
+    const cred = p.expert_credential ? `, ${esc(p.expert_credential)}` : "";
+    const comments = (p.expert_comments || []).map(c => `<li>${esc(c)}</li>`).join("");
+    return `<div style="margin-bottom:14px">
+      <div><strong>${esc(p.company || p.url)}</strong>
+        <span class="muted">${esc(p.product || "")}</span>${sim}</div>
+      <div class="muted" style="font-size:12px;margin:3px 0">
+        ${esc(p.expert_state === "signed" ? "signed" : (p.expert_state || "posted"))}${
+          p.expert_name ? ` by ${esc(p.expert_name)}${cred}` : ""}
+        &middot; draft <span class="pill gain">report_v1</span> → ${
+          p.report_v2 ? '<span class="pill gain">signed report_v2</span>'
+                      : '<span class="pill flag">awaiting sign-off</span>'}</div>
+      ${comments ? `<ul style="margin:4px 0 0;padding-left:18px">${comments}</ul>` : ""}
+    </div>`;
+  }).join("") : `<div class="muted">No expert reviews yet. On the paid enhance, the report is
+    posted to Terac with the draft attached; the reviewer's name, verbatim notes, and the
+    signed version appear here — the one human-in-the-loop step.</div>`;
+
+  $("#table").innerHTML = `<table><thead><tr>
+      <th>Company</th><th>Product</th><th>Tier</th><th>Ship</th>
+      <th>FCC</th><th>Standards</th><th>Hook</th><th>Stage</th></tr></thead><tbody>` +
+    P.map(p => `<tr>
+      <td>${esc(p.company)}</td>
+      <td class="muted">${esc(p.product)}</td>
+      <td>${p.tier === "A" ? '<span class="pill gain">A</span>' : esc(p.tier || "—")}</td>
+      <td>${esc(p.ship_month || "—")}</td>
+      <td>${p.fcc && !p.fcc.checked
+            ? '<span class="pill flag">unverified</span>'
+            : (p.fcc && p.fcc.grants === 0
+              ? '<span class="pill gain">no grant</span>'
+              : esc(p.fcc?.grants ?? "—"))}</td>
+      <td class="mono">${esc((p.standards || p.standards_after || []).join(", ") || "—")}</td>
+      <td>${p.variant ? esc(p.variant) : "—"}</td>
+      <td class="muted">${esc(p.stage || "—")}</td>
+    </tr>`).join("") + `</tbody></table>`;
+
+  $("#events").innerHTML = (state.events || []).slice(-25).reverse()
+    .map(e => `${esc(e.kind)} &middot; ${esc(e.detail)}`).join("<br>") || "no events";
+}
+
+// Prefer live pipeline state; fall back to the committed demo state so the
+// dashboard renders out of the box (before a run, or for the walkthrough).
+async function load(){
+  for (const src of ["../data/state.json", "../data/demo_state.json"]){
+    try {
+      const r = await fetch(src);
+      if (!r.ok) continue;
+      const state = await r.json();
+      if (src.endsWith("demo_state.json"))
+        document.querySelector(".sub").insertAdjacentHTML("beforeend",
+          ' <span class="pill flag">demo data</span>');
+      return render(state);
+    } catch (e) { /* try next */ }
+  }
+  $("#tiles").innerHTML =
+    `<div class="tile err">No state found. Serve the repo root
+     (<span class="mono">python3 -m http.server</span>) rather than opening this
+     file directly, so the fetch is not blocked.</div>`;
+}
+load();
+</script>
+</body>
+</html>
