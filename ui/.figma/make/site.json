@@ -1,5 +1,6 @@
 {
-  "description": "Streamlines hardware startup compliance by collecting founder info, generating expert reports, and detailing necessary standards and follow-up questions.",
+  "title": "Compl.AI",
+  "description": "Describe your hardware and get a compliance report: the standards that apply, what testing costs, which labs can run it, and an expert review.",
   "robots": {
     "index": false
   },
