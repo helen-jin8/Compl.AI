@@ -16,7 +16,7 @@ rejection email.
 
 ## Website walkthrough (~40s)
 
-1. **Landing** → click **Start**.
+1. **Landing** -> click **Start**.
 2. **Form** (`/start`): Name `Ravi`, email `ravi@kitiki.computer`, and paste this
    description:
    > Kitiki, a 13.3-inch open-source e-ink Linux laptop with WiFi, a lithium
