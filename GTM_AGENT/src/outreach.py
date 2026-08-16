@@ -18,6 +18,7 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 
+from . import style
 from .store import OUTBOX
 
 MAX_SENDS = int(os.environ.get("MAX_SENDS", "20"))
@@ -85,7 +86,14 @@ def render(p: dict, det: dict, lab: dict, variant: str, sender: str, sleeper=Non
 
 
 def deliver(to: str, subject: str, body: str, send: bool) -> str:
-    """Write to outbox always. Send only when explicitly told to."""
+    """Write to outbox always. Send only when explicitly told to.
+
+    House-style guard runs first: em dashes and AI tells never leave the building.
+    assert_clean humanizes mechanical punctuation and hard-fails on rhetoric a human
+    must rewrite (docs/STYLE.md). Same discipline as report.py refusing 'certified'.
+    """
+    subject = style.assert_clean(subject, where="subject")
+    body = style.assert_clean(body, where="body")
     safe = to.replace("@", "_at_").replace("/", "_")
     (OUTBOX / f"{safe}.txt").write_text(f"To: {to}\nSubject: {subject}\n\n{body}")
     if not send:
