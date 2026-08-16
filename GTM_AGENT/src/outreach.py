@@ -79,7 +79,39 @@ def _standards_block(det: dict) -> str:
     return "\n".join(lines)
 
 
+def first_touch(p: dict, sender: str) -> tuple[str, str]:
+    """Email 1 of the sequence. One human, single-ask opener. No scope dump.
+
+    A cold first email that dumps the whole standards list reads like an agent and
+    asks for too much at once. The opener notices what they are building, names the
+    one thing they will hit (WiFi + battery means certifications), says who reviews
+    it (real experts + labs), and makes a single soft ask. The full scoped report
+    (variant_a / variant_b) is Email 2, sent once they reply. See docs/PRD.md §7.5.
+    """
+    product = p.get("product", "your device")
+    one_line = p.get("one_line") or "the hardware you're building"
+    subject = f"Hardware certifications for {product}"
+    body = f"""Hey {p.get('first_name','there')},
+
+How's it going? Saw you're building {product}, {one_line}. The early build looks very cool.
+
+Quick one: have you thought about FCC and UL certification for it yet? Anything with WiFi and a battery has to clear a handful of tests before it can ship, and most hardware founders find out how involved that is pretty late.
+
+That's what we built Compl.AI for. You tell us what you're making, and we come back with the exact certifications you need and what they cost, reviewed and signed off by hardware compliance experts who help you get there with the right labs.
+
+Worth me putting together a quick certification scope for {product}?
+
+Best,
+{sender}
+Compl.AI"""
+    return subject, body
+
+
 def render(p: dict, det: dict, lab: dict, variant: str, sender: str, sleeper=None):
+    # Sequence: 'first_touch' is Email 1 (single ask). 'A'/'B' carry the full
+    # scope and are the reply/follow-up once the prospect bites.
+    if variant == "first_touch":
+        return first_touch(p, sender)
     if variant == "A":
         return variant_a(p, det, lab, sender)
     return variant_b(p, det, lab, sender, sleeper)
