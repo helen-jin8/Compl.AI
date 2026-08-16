@@ -6,6 +6,9 @@ import { useExpertStore, type ExpertStage } from '../store/expertStore'
 // Sidebar card showing the human-in-the-loop expert state as it progresses.
 export default function FindingExpert({ expert }: { expert: Expert }) {
   const navigate = useNavigate()
+  // The backend returns a placeholder until a human actually picks the job up,
+  // so a first-name split on it yields "Awaiting is reviewing".
+  const hasRealExpert = Boolean(expert?.name) && expert.name !== 'Awaiting reviewer'
   const stage = useExpertStore((s) => s.stage)
   const start = useExpertStore((s) => s.start)
 
@@ -17,7 +20,7 @@ export default function FindingExpert({ expert }: { expert: Expert }) {
     stage === 'matching'
       ? 'finding an expert…'
       : stage === 'found'
-        ? `${expert.name.split(' ')[0]} is reviewing`
+        ? `${hasRealExpert ? expert.name.split(' ')[0] : 'An expert'} is reviewing`
         : "Ask Patricia"
 
   // Feedback is ready once the expert has finished reviewing — the card becomes clickable.

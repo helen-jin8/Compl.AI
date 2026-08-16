@@ -21,6 +21,7 @@ export default function ReportLayout() {
     { to: '/report/summary', label: 'Project summary' },
     { to: '/report/standards', label: 'Standards', badge: requiredCount },
     { to: '/report/labs', label: 'Labs' },
+    { to: '/report/feedback', label: 'Expert feedback' },
   ]
 
   return (

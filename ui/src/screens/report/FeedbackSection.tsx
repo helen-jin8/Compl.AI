@@ -103,7 +103,9 @@ export default function FeedbackSection() {
             </div>
           ))}
 
-          <p className="font-sans text-sm leading-relaxed text-ink">— {report.expert.name.split(' ')[0]}</p>
+          <p className="font-sans text-sm leading-relaxed text-ink">
+            — {report.expert.name === 'Awaiting reviewer' ? 'Your reviewer' : report.expert.name.split(' ')[0]}
+          </p>
 
           {/* The send button itself is the upsell — replying to Patricia is a paid feature. */}
           <div className="rounded-lg border border-ink/10 bg-chip/30 p-4">

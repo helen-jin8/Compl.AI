@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Client-side routing: every path must serve index.html or deep links
+# (/start, /report/summary, …) 404 on refresh and on direct navigation.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
