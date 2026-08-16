@@ -43,7 +43,7 @@ export default function FollowUpSection() {
                     value={value}
                     onChange={(e) => setDrafts((prev) => ({ ...prev, [q.id]: e.target.value }))}
                     placeholder="Type your answer…"
-                    className="mt-3 min-h-20 w-full resize-none rounded-lg border border-ink/20 bg-chip/20 px-3.5 py-2.5 font-sans text-sm text-ink outline-none transition-shadow placeholder:text-ink-soft/60 focus:border-deep focus:ring-2 focus:ring-deep/30"
+                    className="fc-field mt-3 min-h-20 resize-none"
                   />
                   {value.trim() && (
                     <p className="mt-1.5 font-sans text-xs font-bold text-emerald-600">

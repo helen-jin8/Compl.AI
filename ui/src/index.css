@@ -14,6 +14,7 @@
   --color-deep: #114b8a;
   --color-panel: #ffffff;
   --color-chip: #e5f8ff;
+  --color-cream: #fefcf5;
 }
 
 html {
@@ -65,4 +66,32 @@ body {
 }
 .fc-fade-up {
   animation: fc-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fc-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.fc-pop-in {
+  animation: fc-pop-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Shared look for text inputs/textareas so form fields read consistently everywhere. */
+.fc-field {
+  @apply w-full rounded-lg border border-ink/20 bg-cream px-3.5 py-2.5 font-sans text-sm text-ink outline-none transition placeholder:text-ink-soft/60 focus:border-deep focus:ring-2 focus:ring-deep/30;
+}
+
+/* Shared loading spinner used wherever the app shows an in-progress state. */
+.fc-spinner {
+  @apply h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-deep/20 border-t-deep;
 }

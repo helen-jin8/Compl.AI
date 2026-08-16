@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router'
+import FindingExpert from '../../components/FindingExpert'
 import Shell from '../../components/Shell'
 import { useReport } from '../../store/ReportContext'
+import { useExpertStore } from '../../store/expertStore'
 
 export default function ReportLayout() {
   const navigate = useNavigate()
   const { report, expertEta } = useReport()
+  const matched = useExpertStore((s) => s.matched)
 
   // Deep-linked without a generated report → send to the form.
   useEffect(() => {
@@ -22,12 +25,20 @@ export default function ReportLayout() {
     { to: '/report/labs', label: 'Labs' },
   ]
 
+  // Only shows up once the expert has actually matched with this project.
+  if (matched) {
+    navItems.push({ to: '/report/feedback', label: "Patricia's feedback" })
+  }
+
   return (
-    <Shell maxWidth="max-w-[1400px]">
+    <Shell
+      maxWidth="max-w-[1400px]"
+      headerRight={<FindingExpert expert={report.expert} eta={expertEta} />}
+    >
       <div className="fc-fade-up grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
         {/* Sidebar */}
         <aside className="h-fit rounded-2xl border border-ink/10 bg-white p-5 shadow-xl shadow-deep/15">
-          <p className="font-display text-xl text-ink">{report.projectName}</p>
+          <p className="font-display text-xl leading-snug break-words text-ink">{report.projectName}</p>
           <p className="mt-0.5 font-sans text-xs text-ink-soft">Generated {report.generatedAt}</p>
           <nav className="mt-5 space-y-1">
             {navItems.map((item) => (
@@ -57,31 +68,6 @@ export default function ReportLayout() {
               </NavLink>
             ))}
           </nav>
-
-          <div className="mt-6 rounded-xl border border-ink/10 bg-chip/40 p-4">
-            <div className="flex items-center gap-2.5">
-              <img
-                src={report.expert.avatar}
-                alt={report.expert.name}
-                className="h-9 w-9 rounded-full border border-ink/20 bg-ink/10 object-cover"
-              />
-              <div>
-                <p className="font-sans text-sm font-bold text-ink">{report.expert.name}</p>
-                <p className="font-sans text-xs text-ink-soft">{report.expert.role}</p>
-              </div>
-            </div>
-            <p className="mt-2.5 font-sans text-xs leading-relaxed text-ink">
-              {report.expert.note}
-            </p>
-            <div className="mt-2.5 flex items-center gap-2 rounded-lg bg-white px-2.5 py-1.5">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-              <p className="font-sans text-xs text-ink-soft">
-                {expertEta
-                  ? `Expert review in progress · back in ${expertEta}`
-                  : 'Queuing expert review…'}
-              </p>
-            </div>
-          </div>
         </aside>
 
         {/* Main panel */}

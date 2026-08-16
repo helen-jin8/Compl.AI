@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import Shell from '../components/Shell'
 import Button from '../components/Button'
 import { useReport } from '../store/ReportContext'
@@ -7,11 +7,22 @@ import { useReport } from '../store/ReportContext'
 export default function FormScreen() {
   const navigate = useNavigate()
   const { analyze } = useReport()
+  const [searchParams] = useSearchParams()
 
-  const [founderName, setFounderName] = useState('')
-  const [email, setEmail] = useState('')
-  const [description, setDescription] = useState('')
+  // Prefill from URL params, e.g. ?first=Ada&last=Okafor&email=ada@x.io&description=...
+  const [founderName, setFounderName] = useState(() =>
+    [searchParams.get('first'), searchParams.get('last')].filter(Boolean).join(' '),
+  )
+  const [email, setEmail] = useState(() => searchParams.get('email') ?? '')
+  const [description, setDescription] = useState(() => searchParams.get('description') ?? '')
   const [touched, setTouched] = useState(false)
+
+  const hasPrefill = Boolean(
+    searchParams.get('first') ||
+      searchParams.get('last') ||
+      searchParams.get('email') ||
+      searchParams.get('description'),
+  )
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const valid = founderName.trim() && emailValid && description.trim().length > 12
@@ -27,8 +38,7 @@ export default function FormScreen() {
     })
   }
 
-  const fieldClass =
-    'w-full rounded-lg border border-ink/70 bg-white px-4 py-3 font-body text-sm text-ink outline-none transition-shadow placeholder:text-ink-soft/60 focus:border-deep focus:ring-2 focus:ring-deep/30'
+  const fieldClass = 'fc-field py-3'
 
   return (
     <Shell maxWidth="max-w-4xl">
@@ -37,12 +47,14 @@ export default function FormScreen() {
           Tell us about what you're building
         </h1>
         <p className="mt-3 font-body text-base text-white/85">
-          Three quick fields. Our agents do the rest and an expert reviews the result.
+          {hasPrefill
+            ? "We've pre-filled what we already know — just double-check it and fill in anything missing."
+            : 'Our agents do the rest and an expert reviews the result.'}
         </p>
 
         <div className="mt-8 space-y-4">
           <div>
-            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">
+            <label className="mb-1.5 block font-body text-sm font-extrabold uppercase tracking-wide text-white">
               Founder name
             </label>
             <input
@@ -53,7 +65,7 @@ export default function FormScreen() {
             />
           </div>
           <div>
-            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">Email</label>
+            <label className="mb-1.5 block font-body text-sm font-extrabold uppercase tracking-wide text-white">Email</label>
             <input
               className={fieldClass}
               placeholder="ada@everfield.io"
@@ -65,7 +77,7 @@ export default function FormScreen() {
             )}
           </div>
           <div>
-            <label className="mb-1.5 block font-body text-xs font-extrabold uppercase tracking-wide text-white">
+            <label className="mb-1.5 block font-body text-sm font-extrabold uppercase tracking-wide text-white">
               Describe your startup &amp; product
             </label>
             <textarea
@@ -83,9 +95,6 @@ export default function FormScreen() {
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-3">
-          <span className="font-body text-xs text-white/70">
-            Takes about 20 seconds to generate
-          </span>
           <Button onClick={submit} disabled={touched && !valid}>
             Submit
           </Button>

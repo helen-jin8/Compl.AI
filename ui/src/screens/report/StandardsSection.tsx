@@ -49,9 +49,6 @@ function CheckRow({
   return (
     <div className="overflow-hidden rounded-xl border border-ink/10 bg-white transition-all hover:border-2 hover:border-ink/30 hover:shadow-md">
       <button onClick={onToggle} className="flex w-full items-center gap-3 px-4 py-3 text-left">
-        <span className="rounded-md bg-ink px-2 py-0.5 font-sans text-xs font-bold text-white">
-          {check.authority}
-        </span>
         <div className="flex-1">
           <p className="font-sans text-base font-bold text-ink">{check.code}</p>
           <p className="font-sans text-xs text-ink-soft">{check.title}</p>
@@ -113,7 +110,7 @@ function AskExpert() {
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && send()}
           placeholder="e.g. Can I bundle the Part 15B and 15C testing in one visit?"
-          className="flex-1 rounded-lg border border-ink/20 bg-chip/20 px-3.5 py-2.5 font-sans text-sm text-ink outline-none transition-shadow placeholder:text-ink-soft/60 focus:border-deep focus:ring-2 focus:ring-deep/30"
+          className="fc-field flex-1"
         />
         <button
           onClick={send}

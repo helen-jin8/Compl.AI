@@ -22,16 +22,8 @@ export default function GeneratingScreen() {
   return (
     <Shell maxWidth="max-w-2xl">
       <div className="fc-fade-up mt-8 rounded-2xl border border-ink/10 bg-white p-6 shadow-2xl shadow-deep/25 sm:p-9">
-        <div className="flex items-center gap-2.5">
-          <span className="flex gap-1">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="h-1.5 w-1.5 animate-bounce rounded-full bg-deep"
-                style={{ animationDelay: `${i * 0.15}s` }}
-              />
-            ))}
-          </span>
+        <div className="flex items-center gap-3">
+          <span className="fc-spinner" aria-hidden="true" />
           <h1 className="font-body text-2xl text-ink sm:text-3xl">generating report …</h1>
         </div>
         <p className="mt-2 font-body text-sm text-ink-soft">

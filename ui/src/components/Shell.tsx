@@ -5,9 +5,11 @@ import { Link } from 'react-router'
 export default function Shell({
   children,
   maxWidth = 'max-w-5xl',
+  headerRight,
 }: {
   children: ReactNode
   maxWidth?: string
+  headerRight?: ReactNode
 }) {
   return (
     <div className="fc-ground w-full">
@@ -18,9 +20,11 @@ export default function Shell({
         >
           hardware<span className="text-chip">.check</span>
         </Link>
-        <span className="hidden font-body text-xs text-white/80 sm:block">
-          AI compliance reports · expert reviewed
-        </span>
+        {headerRight ?? (
+          <span className="hidden font-body text-xs text-white/80 sm:block">
+            AI compliance reports · expert reviewed
+          </span>
+        )}
       </header>
       <main className={`mx-auto ${maxWidth} px-6 pb-16 sm:px-10`}>{children}</main>
     </div>

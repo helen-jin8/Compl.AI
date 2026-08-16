@@ -8,6 +8,7 @@ import SummarySection from './screens/report/SummarySection'
 import FollowUpSection from './screens/report/FollowUpSection'
 import StandardsSection from './screens/report/StandardsSection'
 import LabsSection from './screens/report/LabsSection'
+import FeedbackSection from './screens/report/FeedbackSection'
 
 export const router = createBrowserRouter([
   { path: '/', Component: LandingScreen },
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: 'followups', Component: FollowUpSection },
       { path: 'standards', Component: StandardsSection },
       { path: 'labs', Component: LabsSection },
+      { path: 'feedback', Component: FeedbackSection },
     ],
   },
   { path: '*', element: <Navigate to="/" replace /> },
