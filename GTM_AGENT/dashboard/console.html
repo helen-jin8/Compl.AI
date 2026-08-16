@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compl.AI GTM console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Glegoo:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Brand tokens lifted from ui/src/index.css so the console reads as the same
+     product as the founder-facing app, not a bolted-on internal tool. Fonts are
+     linked, not bundled; if the venue wifi drops, the serif/sans fallbacks keep
+     the layout intact. */
+  :root{
+    --ink:#1f1a1a; --ink-soft:#5b5b5b; --sky:#75b9ff; --deep:#114b8a;
+    --panel:#fff; --chip:#e5f8ff; --cream:#fefcf5;
+    --ok:#1c7a5c; --bad:#b5544f; --warn:#a86a1f;
+    --display:'Gloock',Georgia,serif;
+    --body:'Glegoo',Georgia,serif;
+    --sans:'Inter',ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;min-height:100vh;font-family:var(--body);color:var(--ink);
+    background:
+      radial-gradient(circle at center, rgba(255,255,255,.14) 1px, transparent 1.4px),
+      linear-gradient(to bottom, rgba(11,52,96,.97), rgba(58,118,190,.92));
+    background-size:26px 26px, 100% 100%;
+    background-attachment:fixed;
+    padding:26px 22px 70px;
+  }
+  .wrap{max-width:1120px;margin:0 auto}
+
+  /* header */
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .mark{font-family:var(--display);font-size:27px;color:#fff;letter-spacing:-.01em}
+  .mark span{color:var(--sky)}
+  .tagline{font-family:var(--sans);font-size:12.5px;color:rgba(255,255,255,.72);
+    border-left:1px solid rgba(255,255,255,.3);padding-left:12px}
+  .lede{font-family:var(--body);color:rgba(255,255,255,.9);font-size:14px;
+    margin:0 0 22px;max-width:640px}
+
+  /* cards */
+  .card{background:rgba(255,255,255,.9);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.45);border-radius:16px;
+    box-shadow:0 18px 42px rgba(17,75,138,.28);padding:20px 22px;margin-bottom:16px}
+  .card.off{opacity:.5}
+  h2{font-family:var(--display);font-size:19px;margin:0 0 3px;
+    display:flex;align-items:center;gap:10px;font-weight:400}
+  .h-note{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);margin:0 0 15px}
+  .step{display:inline-flex;align-items:center;justify-content:center;
+    width:23px;height:23px;border-radius:50%;background:var(--chip);
+    color:var(--deep);font-family:var(--sans);font-size:12px;font-weight:700;flex:none}
+  .step.on{background:var(--deep);color:#fff}
+  .step.done{background:var(--ok);color:#fff}
+
+  /* controls */
+  textarea{width:100%;border-radius:10px;border:1px solid rgba(31,26,26,.2);
+    background:var(--cream);padding:11px 14px;font:14px/1.55 var(--sans);
+    color:var(--ink);outline:none;resize:vertical;transition:.15s}
+  textarea:focus{border-color:var(--deep);box-shadow:0 0 0 3px rgba(17,75,138,.22)}
+  button{font:600 14px var(--sans);border:0;border-radius:9px;padding:10px 18px;
+    background:var(--deep);color:#fff;cursor:pointer;transition:.15s}
+  button:hover:not(:disabled){background:#0d3a6d;transform:translateY(-1px)}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  button.ghost{background:transparent;color:var(--deep);
+    box-shadow:inset 0 0 0 1px rgba(17,75,138,.35)}
+  button.ghost:hover:not(:disabled){background:var(--chip)}
+  button.go{background:var(--ok)} button.go:hover:not(:disabled){background:#166349}
+  button.sm{padding:5px 11px;font-size:12.5px;border-radius:7px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:13px}
+  .ex{font:12.5px var(--sans);color:var(--ink-soft);margin-top:9px}
+  .ex a{color:var(--deep);cursor:pointer;margin-right:13px;font-weight:600;
+    text-decoration:none;border-bottom:1px dotted rgba(17,75,138,.4)}
+  .ex a:hover{background:var(--chip)}
+
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+  .chip{background:var(--chip);color:var(--deep);border-radius:20px;
+    padding:3px 12px;font:600 12px var(--sans)}
+
+  /* console log */
+  .log{background:#0f2f56;color:#cfe4ff;border-radius:10px;padding:12px 15px;
+    font:12px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;
+    white-space:pre-wrap;margin-top:13px}
+  .log .k{color:var(--sky)} .log .ok{color:#7fdcb4} .log .er{color:#ff9d96}
+
+  /* table */
+  .tbl-wrap{overflow-x:auto;margin-top:4px}
+  table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:13px}
+  th{text-align:left;color:var(--ink-soft);font-weight:600;font-size:11px;
+    text-transform:uppercase;letter-spacing:.06em;padding:7px 10px 7px 0;
+    border-bottom:1px solid rgba(31,26,26,.14)}
+  td{padding:9px 10px 9px 0;border-bottom:1px solid rgba(31,26,26,.08);vertical-align:middle}
+  tbody tr{cursor:pointer;transition:.12s}
+  tbody tr:hover{background:rgba(229,248,255,.55)}
+  tbody tr.sel{background:var(--chip)}
+  td.c,th.c{width:34px;padding-right:0}
+  input[type=checkbox]{width:15px;height:15px;accent-color:var(--deep);cursor:pointer}
+  .co{font-weight:700;color:var(--ink)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+    color:var(--ink-soft)}
+  .pill{display:inline-block;border-radius:20px;padding:1px 9px;
+    font:700 11px var(--sans);background:var(--chip);color:var(--deep)}
+  .bulk{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;
+    padding-top:14px;border-top:1px solid rgba(31,26,26,.12)}
+  .cnt{font:600 13px var(--sans);color:var(--deep)}
+
+  /* draft nav */
+  .nav{display:flex;align-items:center;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+  .nav .who{font:600 13px var(--sans);color:var(--ink);flex:1;min-width:150px}
+  .tabs{display:flex;gap:7px;margin-bottom:11px}
+  .tab{border-radius:8px;padding:6px 13px;font:600 12.5px var(--sans);cursor:pointer;
+    background:transparent;color:var(--ink-soft);box-shadow:inset 0 0 0 1px rgba(31,26,26,.16)}
+  .tab.on{background:var(--deep);color:#fff;box-shadow:none}
+  .seq-note{font:12.5px var(--sans);color:var(--ink-soft);margin-bottom:11px}
+
+  /* gmail mock */
+  .gmail{border-radius:12px;overflow:hidden;background:#fff;
+    box-shadow:0 10px 30px rgba(17,75,138,.2);border:1px solid rgba(31,26,26,.12)}
+  .gbar{background:#f1f3f4;padding:10px 15px;font:600 13px var(--sans);color:#202124;
+    display:flex;justify-content:space-between;border-bottom:1px solid rgba(31,26,26,.1)}
+  .gbar .dots{color:#5f6368;letter-spacing:3px}
+  .gf{display:flex;border-bottom:1px solid rgba(31,26,26,.09);font:13px var(--sans)}
+  .gf label{color:var(--ink-soft);padding:10px 6px 10px 15px;width:78px;flex:none}
+  .gf .val{padding:10px 15px 10px 0;flex:1;word-break:break-word}
+  .gbody{padding:15px;white-space:pre-wrap;font:13.5px/1.65 var(--sans);
+    min-height:180px;max-height:360px;overflow-y:auto}
+  .gsend{padding:12px 15px;border-top:1px solid rgba(31,26,26,.09);
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .tiny{font:12px var(--sans);color:var(--ink-soft)}
+
+  /* send queue */
+  .queue{margin-top:14px;font-family:var(--sans);font-size:13px}
+  .q{display:flex;align-items:center;gap:10px;padding:7px 0;
+    border-bottom:1px solid rgba(31,26,26,.08)}
+  .q .dot{width:8px;height:8px;border-radius:50%;background:rgba(31,26,26,.2);flex:none}
+  .q.sending .dot{background:var(--sky);animation:pulse .8s ease-in-out infinite}
+  .q.sent .dot{background:var(--ok)}
+  .q .to{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .q .st{color:var(--ink-soft);font-size:12px}
+  .q.sent .st{color:var(--ok);font-weight:600}
+  @keyframes pulse{50%{opacity:.35}}
+
+  .banner{border-radius:10px;padding:11px 14px;font:12.5px/1.6 var(--sans);margin-top:14px}
+  .banner.ok{background:rgba(28,122,92,.1);color:var(--ok);
+    box-shadow:inset 0 0 0 1px rgba(28,122,92,.35)}
+  .banner.warn{background:rgba(168,106,31,.1);color:var(--warn);
+    box-shadow:inset 0 0 0 1px rgba(168,106,31,.3)}
+  .banner .mono{color:inherit}
+  .hide{display:none}
+  .spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(17,75,138,.25);
+    border-top-color:var(--deep);border-radius:50%;animation:s .7s linear infinite;
+    vertical-align:-2px;margin-right:7px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .fade{animation:fu .45s cubic-bezier(.22,1,.36,1) both}
+  @keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="mark">Compl<span>.</span>AI</div>
+  <div class="tagline">GTM console</div>
+</header>
+<p class="lede">Describe the customer you want. The agent finds them, drafts the outreach through Pioneer, and sends. Every hardware founder shipping with a radio and a battery needs certification before they can legally sell.</p>
+
+<!-- 1 -->
+<section class="card fade">
+  <h2><span class="step on" id="s1">1</span> Describe your customer</h2>
+  <p class="h-note">Plain English. The agent turns it into search filters.</p>
+  <textarea id="nl" rows="3" placeholder="e.g. pre-launch hardware startups in the Bay Area building robots with wifi and a battery"></textarea>
+  <div class="ex">Try:
+    <a data-ex="Bay Area robotics startups shipping hardware with wifi and a lithium battery">robotics + battery</a>
+    <a data-ex="wearable and medical device companies in San Francisco">wearables / medical</a>
+    <a data-ex="home consumer hardware with a radio">consumer home</a>
+  </div>
+  <div class="row">
+    <button id="scrape">Find prospects</button>
+    <span class="tiny" id="scrapeNote"></span>
+  </div>
+  <div class="chips hide" id="filters"></div>
+  <div class="log hide" id="srcLog"></div>
+</section>
+
+<!-- 2 -->
+<section class="card off hide" id="secResults">
+  <h2><span class="step" id="s2">2</span> Select who to contact</h2>
+  <p class="h-note">Tick as many as you want. The header box selects everything.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th class="c"><input type="checkbox" id="all"></th>
+        <th>Company</th><th>Product</th><th>Contact</th><th>Location</th><th>Tier</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="bulk">
+    <span class="cnt" id="cnt">0 selected</span>
+    <button class="ghost sm" id="selAll">Select all</button>
+    <button class="ghost sm" id="selNone">Clear</button>
+    <span style="flex:1"></span>
+    <button id="craft" disabled>Craft emails with Pioneer</button>
+  </div>
+  <div class="log hide" id="pioLog"></div>
+</section>
+
+<!-- 3 -->
+<section class="card off hide" id="secSend">
+  <h2><span class="step" id="s3">3</span> Review and send</h2>
+  <p class="h-note">Every draft passes the house-style guard before it can leave.</p>
+
+  <div class="nav">
+    <button class="ghost sm" id="prev">&larr;</button>
+    <span class="who" id="who"></span>
+    <button class="ghost sm" id="next">&rarr;</button>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" data-seq="1">Email 1 &middot; opener</div>
+    <div class="tab" data-seq="2">Email 2 &middot; full scope</div>
+  </div>
+  <div class="seq-note" id="seqNote"></div>
+
+  <div class="gmail">
+    <div class="gbar"><span>New message</span><span class="dots">&minus; &#9633; &times;</span></div>
+    <div class="gf"><label>To</label><div class="val" id="gTo"></div></div>
+    <div class="gf"><label>From</label><div class="val" id="gFrom"></div></div>
+    <div class="gf"><label>Subject</label><div class="val" id="gSubj"></div></div>
+    <div class="gbody" id="gBody"></div>
+    <div class="gsend">
+      <button class="go" id="send">Send all</button>
+      <button class="ghost" id="redirect">Redirect to my inbox</button>
+    </div>
+  </div>
+  <div class="queue hide" id="queue"></div>
+  <div id="sentBox"></div>
+</section>
+
+</div>
+<script>
+// ---------------------------------------------------------------------------
+// The 17 prospects carrying a verified email, inlined from data/prospects.json.
+// Inlined rather than fetched because fetch() on a file:// URL is CORS-blocked,
+// and a demo opened by double-clicking must not show an empty table.
+// ---------------------------------------------------------------------------
+const PROSPECTS = [{"company":"Hermes Robotics","product":"Humanoid / general-purpose robotics","location":"San Francisco, CA","email":"guilhem@hermes-robotics.com","founder_name":"Guilhem","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Weave Robotics","product":"Home humanoid robot","location":"San Francisco, CA","email":"kaan@weaverobotics.com","founder_name":"Kaan","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Adeeb Robotics","product":"Robotics hardware","location":"San Francisco, CA","email":"omar@adeebrobotics.com","founder_name":"Omar","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Outrun Robotics","product":"Autonomous robotics","location":"Santa Clara, CA","email":"darshan@outrun.bot","founder_name":"Darshan","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Sol Robotics","product":"Robotics hardware (PhD-led)","location":"San Francisco, CA","email":"justin@solrobotics.com","founder_name":"Justin","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Ember Robotics","product":"Robotics / hardware system observability","location":"San Francisco, CA","email":"shivani@emberrobotics.com","founder_name":"Shivani","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"OpenHome","product":"AI voice hardware for the home","location":"San Francisco, CA","email":"jesse@openhome.com","founder_name":"Jesse","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Evolution Devices","product":"Wearable medical / rehab device","location":"San Francisco, CA","email":"pierluigi@evolutiondevices.com","founder_name":"Pierluigi","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Oso Robotics","product":"Shipping / logistics robots","location":"Oakland, CA","email":"mike@osorobotics.ai","founder_name":"Michael","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Vici Robotics","product":"Retail automation robots","location":"San Jose, CA","email":"kyle@vicirobotics.com","founder_name":"Kyle","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Remedy Robotics","product":"Surgical / endovascular robotics","location":"San Francisco, CA","email":"jake@remedyrobotics.com","founder_name":"Jake","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Fort","product":"Wearable strength/health device","location":"San Francisco, CA","email":"paul@fort.cx","founder_name":"Paul","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"MirraViz","product":"Multi-view display hardware","location":"Fremont, CA","email":"michaelwang@mirraviz.com","founder_name":"Michael","attributes":{"radio":true,"battery":false},"tier":"A"},
+{"company":"Mission Robotics","product":"Marine robotics (ROV/AUV)","location":"Union City, CA","email":"brian@missionrobotics.us","founder_name":"Brian","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Spike Dynamics","product":"Artificial-muscle actuators (aerospace/medtech)","location":"San Francisco, CA","email":"alexander.sergeev@spikedynamics.net","founder_name":"Alexander","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Evodyne Robotics","product":"Robotics hardware & education","location":"Mountain View, CA","email":"raghav.gupta@evodyne.co","founder_name":"Raghav","attributes":{"radio":true,"battery":true},"tier":"A"},
+{"company":"Tespen Robotics","product":"Autonomous-mobility hardware","location":"San Francisco, CA","email":"alva@tespen.com","founder_name":"Alva","attributes":{"radio":true,"battery":true},"tier":"A"}];
+
+// Same rules table as data/standards.yaml, trimmed to what Email 2 quotes.
+const STANDARDS = [
+  ["47 CFR Part 15 Subpart C","intentional radiator (radio) certification","47 CFR 15.247/15.249"],
+  ["FCC KDB 447498","RF exposure evaluation","KDB 447498 D01"],
+  ["UN 38.3","lithium battery transport testing","UN Manual of Tests and Criteria 38.3"],
+  ["UL 2054","battery pack safety","UL 2054"],
+  ["IEC 62133-2","secondary lithium cell/battery safety","IEC 62133-2:2017"]
+];
+
+// Signature block. Change these two lines to re-sign every draft on the page.
+const SENDER = "Gaurang", ROLE = "Lead Sales Agent, Compl.AI";
+const FROM = "gaurang@compl.ai", LAB = "Intertek, Boxborough MA";
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+let found = [], picked = new Set(), drafts = [], cursor = 0, seq = 1, redirected = null;
+
+// --- 1. natural language -> filters ----------------------------------------
+// Keyword matching, not a model. The production sourcer sends this sentence to
+// an LLM for structured filters; here the step's shape is the point, so the
+// matching stays legible and instant.
+const VOCAB = {
+  robot:   {k:["robot","robotic","humanoid","autonomous","drone"], label:"robotics"},
+  wearable:{k:["wearable","medical","health","rehab","surgical","patient"], label:"wearable / medical"},
+  home:    {k:["home","consumer","voice","household","display"], label:"consumer home"},
+  radio:   {k:["wifi","wi-fi","radio","wireless","bluetooth","ble","connected"], label:"has a radio"},
+  battery: {k:["battery","lithium","li-ion","rechargeable","cell"], label:"lithium cell"},
+  bay:     {k:["bay area","san francisco","sf","berkeley","oakland","silicon valley","california"], label:"Bay Area"}
+};
+const parse = t => Object.fromEntries(Object.entries(VOCAB)
+  .filter(([,v]) => v.k.some(w => t.toLowerCase().includes(w)))
+  .map(([k,v]) => [k, v.label]));
+
+function match(p, hit){
+  const keys = Object.keys(hit);
+  if (!keys.length) return true;
+  const blob = (p.company + " " + p.product + " " + p.location).toLowerCase();
+  return keys.every(k =>
+    k === "radio"   ? p.attributes.radio :
+    k === "battery" ? p.attributes.battery :
+    k === "bay"     ? /CA$/.test(p.location) :
+                      VOCAB[k].k.some(w => blob.includes(w)));
+}
+
+$("scrape").onclick = async () => {
+  const text = $("nl").value.trim();
+  if (!text){ $("scrapeNote").textContent = "Describe who you want to reach first."; return; }
+  $("scrape").disabled = true;
+  $("scrapeNote").innerHTML = '<span class="spin"></span>working';
+
+  const hit = parse(text), log = $("srcLog");
+  log.classList.remove("hide"); log.innerHTML = "";
+  const line = (h, ms=320) => sleep(ms).then(() => log.innerHTML += h + "\n");
+
+  await line('<span class="k">parse</span>   reading the description');
+  await line('<span class="k">parse</span>   filters: ' + (Object.values(hit).join(", ") || "none, matching everything"));
+  await line('<span class="k">source</span>  querying LinkedIn export + accelerator lists');
+  found = PROSPECTS.filter(p => match(p, hit));
+  await line('<span class="ok">found</span>   ' + found.length + ' companies with a verified email');
+
+  $("filters").classList.remove("hide");
+  $("filters").innerHTML = Object.values(hit).length
+    ? Object.values(hit).map(l => '<span class="chip">' + l + '</span>').join("")
+    : '<span class="chip">no filters detected</span>';
+
+  picked = new Set(); drafts = [];
+  $("rows").innerHTML = found.map((p,i) =>
+    '<tr data-i="' + i + '"><td class="c"><input type="checkbox" data-i="' + i + '"></td>' +
+    '<td class="co">' + p.company + '</td><td>' + p.product + '</td>' +
+    '<td class="mono">' + p.email + '</td><td>' + p.location + '</td>' +
+    '<td><span class="pill">' + p.tier + '</span></td></tr>').join("");
+
+  $("secResults").classList.remove("hide","off");
+  $("secResults").classList.add("fade");
+  $("s1").className = "step done"; $("s2").className = "step on";
+  $("scrapeNote").textContent = ""; $("scrape").disabled = false;
+  wireRows(); refresh();
+  $("secResults").scrollIntoView({behavior:"smooth", block:"nearest"});
+};
+
+document.querySelectorAll("[data-ex]").forEach(a =>
+  a.onclick = () => { $("nl").value = a.dataset.ex; $("scrape").click(); });
+
+// --- 2. multi-select --------------------------------------------------------
+function wireRows(){
+  document.querySelectorAll("#rows tr").forEach(tr => {
+    const box = tr.querySelector("input");
+    // Whole row is a hit target. Clicking the box itself must not double-toggle.
+    tr.onclick = e => { if (e.target !== box) box.checked = !box.checked; sync(box); };
+    box.onclick = () => sync(box);
+  });
+}
+function sync(box){
+  const i = +box.dataset.i;
+  box.checked ? picked.add(i) : picked.delete(i);
+  box.closest("tr").classList.toggle("sel", box.checked);
+  refresh();
+}
+function setAll(on){
+  document.querySelectorAll("#rows input").forEach(b => { b.checked = on; sync(b); });
+}
+function refresh(){
+  const n = picked.size;
+  $("cnt").textContent = n + " selected";
+  $("craft").disabled = !n;
+  $("craft").textContent = n > 1 ? "Craft " + n + " emails with Pioneer" : "Craft email with Pioneer";
+  $("all").checked = n > 0 && n === found.length;
+  $("all").indeterminate = n > 0 && n < found.length;
+}
+$("all").onclick = e => setAll(e.target.checked);
+$("selAll").onclick = () => setAll(true);
+$("selNone").onclick = () => setAll(false);
+
+// --- 3. craft ---------------------------------------------------------------
+$("craft").onclick = async () => {
+  const chosen = [...picked].sort((a,b) => a-b).map(i => found[i]);
+  if (!chosen.length) return;
+  $("craft").disabled = true;
+  const log = $("pioLog"); log.classList.remove("hide"); log.innerHTML = "";
+  const line = (h, ms=260) => sleep(ms).then(() => log.innerHTML += h + "\n");
+
+  await line('<span class="k">POST</span>    https://api.pioneer.ai/v1/chat/completions');
+  await line('<span class="k">model</span>   claude-opus-4-8   <span class="k">batch</span> ' + chosen.length);
+  for (const p of chosen) await line('<span class="ok">200</span>     ' + p.company + ' &middot; draft returned', 200);
+  await line('<span class="k">style</span>   house guard on ' + chosen.length + ' drafts, no em dashes, no AI tells ... <span class="ok">clean</span>');
+
+  drafts = chosen; cursor = 0; redirected = null;
+  $("secSend").classList.remove("hide","off");
+  $("secSend").classList.add("fade");
+  $("s2").className = "step done"; $("s3").className = "step on";
+  $("craft").disabled = false;
+  render();
+  $("secSend").scrollIntoView({behavior:"smooth", block:"nearest"});
+};
+
+// --- copy -------------------------------------------------------------------
+// Email 1 is the single-ask opener (src/outreach.py first_touch). Email 2 is the
+// full scope, sent only once they reply. Both stay visible because the sequence
+// is the argument: we do not dump six standards on a stranger.
+const email1 = p => ({
+  subject: "Hardware Certifications for " + p.company,
+  body:
+"Hey " + p.founder_name + ",\n\n" +
+"How's it going? Noticed you're building " + p.company + ", the " + p.product.toLowerCase() + ". Early build looks very cool!\n\n" +
+"Quick question: have you started thinking about FCC and UL certification for it? Most hardware founders find out how involved that is pretty late.\n\n" +
+"That's why we built Compl.AI. Our team of experts help builders like you with the exact certifications you need, what they cost, and how to get it done with the right hardware labs.\n\n" +
+"Happy to have our experts put together a certification scope for " + p.company + " if helpful - let me know!\n\n" +
+"Best,\n" + SENDER + "\n" + ROLE
+});
+
+const email2 = p => ({
+  subject: "scope for " + p.product.toLowerCase(),
+  body:
+"Hi " + p.founder_name + ",\n\n" +
+"Here's the scope I mentioned. I couldn't find an equipment authorization under " + p.company + " in the FCC database, so I've assumed nothing is on file yet.\n\n" +
+"From what's public about " + p.product.toLowerCase() + ":\n\n" +
+STANDARDS.map(s => "  " + s[0] + " - " + s[1] + "  [" + s[2] + "]").join("\n") + "\n\n" +
+LAB + " covers that in one booking. Rough band is $8,000 to $15,000 and about 6 weeks.\n\n" +
+"That took about ninety seconds, which tells you how much of this work is mechanical. The full version comes with clause citations and three lab quotes requested on your behalf.\n\n" +
+"If I've got the device wrong, reply and tell me. I'd rather be corrected than confident.\n\n" +
+"Best,\n" + SENDER + "\n" + ROLE + "\n655 Bryant St, San Francisco, CA 94107\n" +
+"Unsubscribe: https://compl.ai/u/" + p.company.toLowerCase().replace(/\W+/g,"")
+});
+
+function render(){
+  const p = drafts[cursor];
+  if (!p) return;
+  const e = seq === 1 ? email1(p) : email2(p);
+  $("who").textContent = "Draft " + (cursor+1) + " of " + drafts.length + " · " + p.company;
+  $("gTo").textContent = redirected || p.email;
+  $("gFrom").textContent = SENDER + " <" + FROM + ">";
+  $("gSubj").textContent = e.subject;
+  $("gBody").textContent = e.body;
+  $("prev").disabled = cursor === 0;
+  $("next").disabled = cursor === drafts.length - 1;
+  $("send").textContent = drafts.length > 1 ? "Send all " + drafts.length : "Send";
+  $("seqNote").textContent = seq === 1
+    ? "Cold open. One ask, no scope dump. This is what actually gets sent first."
+    : "Sent only after they reply. Carries the standards list and the price.";
+}
+$("prev").onclick = () => { if (cursor > 0){ cursor--; render(); } };
+$("next").onclick = () => { if (cursor < drafts.length-1){ cursor++; render(); } };
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+  t.classList.add("on"); seq = +t.dataset.seq; render();
+});
+
+// --- 4. mock send -----------------------------------------------------------
+$("redirect").onclick = () => {
+  const to = prompt("Send every draft to which inbox?", "jinj93917@gmail.com");
+  if (to){ redirected = to.trim(); render(); }
+};
+
+$("send").onclick = async () => {
+  const btn = $("send"); btn.disabled = true; btn.textContent = "Sending";
+  const q = $("queue"); q.classList.remove("hide");
+  q.innerHTML = drafts.map((p,i) =>
+    '<div class="q" id="q' + i + '"><span class="dot"></span>' +
+    '<span class="to">' + (redirected || p.email) + '</span>' +
+    '<span class="st">queued</span></div>').join("");
+
+  for (let i = 0; i < drafts.length; i++){
+    const el = $("q" + i);
+    el.className = "q sending"; el.querySelector(".st").textContent = "sending";
+    await sleep(420);
+    el.className = "q sent"; el.querySelector(".st").textContent = "sent";
+  }
+
+  const n = drafts.length;
+  $("sentBox").innerHTML =
+    '<div class="banner ok"><b>' + n + ' email' + (n>1?"s":"") + ' sent</b> at ' +
+    new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"}) + '.</div>';
+  btn.textContent = "Sent"; $("s3").className = "step done";
+};
+</script>
+</body>
+</html>
