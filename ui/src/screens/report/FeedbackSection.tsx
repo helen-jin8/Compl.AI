@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../../components/Button'
 import { useReport } from '../../store/ReportContext'
+import { DEMO_EXPERT } from '../../components/FindingExpert'
 
 const UPGRADE_URL = 'https://buy.stripe.com/test_00waEW43g3ILbFccvk9ws00'
 
@@ -104,7 +105,10 @@ export default function FeedbackSection() {
           ))}
 
           <p className="font-sans text-sm leading-relaxed text-ink">
-            — {report.expert.name === 'Awaiting reviewer' ? 'Your reviewer' : report.expert.name.split(' ')[0]}
+            —{' '}
+            {report.expert.name === 'Awaiting reviewer'
+              ? DEMO_EXPERT.name.split(' ')[0]
+              : report.expert.name.split(' ')[0]}
           </p>
 
           {/* The send button itself is the upsell — replying to Patricia is a paid feature. */}

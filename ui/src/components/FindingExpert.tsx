@@ -3,12 +3,24 @@ import { useNavigate } from 'react-router'
 import type { Expert } from '../api/complianceApi'
 import { useExpertStore, type ExpertStage } from '../store/expertStore'
 
+// Stock portrait standing in for the Patricia persona while the expert loop is
+// mocked. The backend returns a neutral placeholder because no real reviewer is
+// assigned yet; this is presentation only.
+export const DEMO_EXPERT = {
+  name: 'Patricia Nguyen',
+  role: 'Senior Compliance Engineer',
+  avatar:
+    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=160&h=160&fit=crop&auto=format',
+  note: '',
+}
+
 // Sidebar card showing the human-in-the-loop expert state as it progresses.
 export default function FindingExpert({ expert }: { expert: Expert }) {
   const navigate = useNavigate()
   // The backend returns a placeholder until a human actually picks the job up,
   // so a first-name split on it yields "Awaiting is reviewing".
   const hasRealExpert = Boolean(expert?.name) && expert.name !== 'Awaiting reviewer'
+  const shown = hasRealExpert ? expert : DEMO_EXPERT
   const stage = useExpertStore((s) => s.stage)
   const start = useExpertStore((s) => s.start)
 
@@ -20,7 +32,7 @@ export default function FindingExpert({ expert }: { expert: Expert }) {
     stage === 'matching'
       ? 'finding an expert…'
       : stage === 'found'
-        ? `${hasRealExpert ? expert.name.split(' ')[0] : 'An expert'} is reviewing`
+        ? `${shown.name.split(' ')[0]} is reviewing`
         : "Ask Patricia"
 
   // Feedback is ready once the expert has finished reviewing — the card becomes clickable.
@@ -42,7 +54,7 @@ export default function FindingExpert({ expert }: { expert: Expert }) {
         ready ? 'cursor-pointer transition-colors hover:bg-chip/70' : ''
       }`}
     >
-      <AvatarGroup expert={expert} stage={stage} />
+      <AvatarGroup expert={shown} stage={stage} />
       <p className="font-sans text-sm text-ink">{label}</p>
     </div>
   )
