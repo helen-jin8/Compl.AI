@@ -1,4 +1,8 @@
+import { useState } from 'react'
+import Button from '../../components/Button'
 import { useReport } from '../../store/ReportContext'
+
+const UPGRADE_URL = 'https://buy.stripe.com/test_00waEW43g3ILbFccvk9ws00'
 
 interface FeedbackGroup {
   heading: string
@@ -32,9 +36,12 @@ const FEEDBACK_GROUPS: FeedbackGroup[] = [
 
 export default function FeedbackSection() {
   const { report } = useReport()
+  const [message, setMessage] = useState('')
   if (!report) return null
 
   const firstName = report.founder.founderName.split(' ')[0]
+
+  const [visibleGroup, ...restGroups] = FEEDBACK_GROUPS
 
   return (
     <div>
@@ -43,27 +50,51 @@ export default function FeedbackSection() {
         Notes from your assigned compliance expert as she reviews the generated report.
       </p>
 
-      <div className="relative mt-6 w-full overflow-hidden rounded-xl border border-ink/10 bg-white">
+      <div className="mt-6 w-full rounded-xl border border-ink/10 bg-white">
         <div className="space-y-6 p-6 sm:p-8">
+          <div className="flex items-start gap-3 border-b border-ink/10 pb-5">
+            <img
+              src={report.expert.avatar}
+              alt={report.expert.name}
+              className="h-11 w-11 shrink-0 rounded-full object-cover"
+            />
+            <div>
+              <p className="font-sans text-sm font-bold text-ink">{report.expert.name}</p>
+              <p className="font-sans text-xs text-ink-soft">{report.expert.role}</p>
+              <p className="mt-0.5 font-sans text-xs text-ink-soft/70">
+                to {firstName} · reviewed via compl.ai
+              </p>
+            </div>
+          </div>
+
           <p className="font-sans text-sm leading-relaxed text-ink">Hi {firstName},</p>
           <p className="font-sans text-sm leading-relaxed text-ink">
-            I spent some time going through what hardware.check pulled together for{' '}
+            I spent some time going through what compl.ai pulled together for{' '}
             <span className="font-bold">{report.projectName}</span> — here's where things stand.
           </p>
 
-          {FEEDBACK_GROUPS.map((group, gi) => (
+          <div key={visibleGroup.heading}>
+            <h3 className="font-sans text-sm font-extrabold uppercase tracking-wide text-ink">
+              {visibleGroup.heading}
+            </h3>
+            <ul className="mt-2 space-y-2">
+              {visibleGroup.items.map((item, i) => (
+                <li key={i} className="flex gap-2.5 font-sans text-sm leading-relaxed text-ink">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-deep" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {restGroups.map((group) => (
             <div key={group.heading}>
               <h3 className="font-sans text-sm font-extrabold uppercase tracking-wide text-ink">
                 {group.heading}
               </h3>
               <ul className="mt-2 space-y-2">
                 {group.items.map((item, i) => (
-                  <li
-                    key={i}
-                    className={`flex gap-2.5 font-sans text-sm leading-relaxed text-ink ${
-                      gi > 1 || (gi === 1 && i > 0) ? 'select-none blur-sm' : ''
-                    }`}
-                  >
+                  <li key={i} className="flex gap-2.5 font-sans text-sm leading-relaxed text-ink">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-deep" />
                     <span>{item}</span>
                   </li>
@@ -72,19 +103,34 @@ export default function FeedbackSection() {
             </div>
           ))}
 
-          <p className="select-none font-sans text-sm leading-relaxed text-ink blur-sm">
-            — Patricia
-          </p>
-        </div>
+          <p className="font-sans text-sm leading-relaxed text-ink">— {report.expert.name.split(' ')[0]}</p>
 
-        <div className="absolute inset-x-0 bottom-0 flex h-2/3 flex-col items-center justify-end gap-3 bg-gradient-to-t from-white via-white/95 to-transparent pb-6">
-          <p className="font-sans text-sm text-ink">Unlock the rest of Patricia's feedback</p>
-          <button className="rounded-full bg-deep px-5 py-2 font-sans text-sm font-bold text-white transition-transform hover:-translate-y-0.5">
-            Upgrade to see full review
-          </button>
+          {/* The send button itself is the upsell — replying to Patricia is a paid feature. */}
+          <div className="rounded-lg border border-ink/10 bg-chip/30 p-4">
+            <p className="font-sans text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+              Ask Patricia
+            </p>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Ask a follow-up question…"
+              className="fc-field mt-2 min-h-[70px] w-full resize-none"
+            />
+            <div className="mt-2 flex justify-end">
+              <Button
+                type="button"
+                onClick={() => window.open(UPGRADE_URL, '_blank', 'noopener,noreferrer')}
+                disabled={!message.trim()}
+                className="px-4 py-2 text-xs"
+              >
+                Upgrade to send →
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   )
 }
+
 

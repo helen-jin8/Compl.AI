@@ -5,7 +5,7 @@ export type ExpertStage = 'matching' | 'found' | 'reviewing'
 // Full loop is ~3 minutes, then it settles into reviewing (mocked human-in-the-loop demo).
 const STAGE_DURATION_MS: Record<ExpertStage, number> = {
   matching: 5_000,
-  found: 2_000,
+  found: 4_000,
   reviewing: 3_000,
 }
 const NEXT_STAGE: Record<ExpertStage, ExpertStage> = {
